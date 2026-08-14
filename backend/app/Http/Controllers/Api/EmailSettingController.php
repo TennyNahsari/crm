@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\HasTenantUser;
 use App\Models\EmailSetting;
 use Illuminate\Http\Request;
 
 class EmailSettingController extends Controller
 {
+    use HasTenantUser;
+
     public function show(Request $request)
     {
-        $setting = EmailSetting::where('user_id', $request->user()->id)->first();
+        $userProfile = $this->getCurrentUserProfile();
+        $setting = EmailSetting::where('user_id', $userProfile->id)->first();
         
         if ($setting) {
             // Mask password for security
@@ -32,8 +36,10 @@ class EmailSettingController extends Controller
             'mail_from_name' => 'required|string',
         ]);
 
+        $userProfile = $this->getCurrentUserProfile();
+
         $setting = EmailSetting::updateOrCreate(
-            ['user_id' => $request->user()->id],
+            ['user_id' => $userProfile->id],
             $validated
         );
 
@@ -60,7 +66,8 @@ class EmailSettingController extends Controller
             unset($validated['mail_password']);
         }
 
-        $setting = EmailSetting::where('user_id', $request->user()->id)->firstOrFail();
+        $userProfile = $this->getCurrentUserProfile();
+        $setting = EmailSetting::where('user_id', $userProfile->id)->firstOrFail();
         $setting->update($validated);
 
         return response()->json([

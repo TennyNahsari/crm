@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\HasTenantUser;
 use App\Models\Customer;
 use App\Models\LeadStatus;
 use App\Models\Area;
@@ -12,10 +13,13 @@ use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
+    use HasTenantUser;
+
     public function stats(Request $request)
     {
-        $userId = $request->user()->id;
-        $role = $request->user()->role;
+        $userProfile = $this->getCurrentUserProfile();
+        $userId = $userProfile->id;
+        $role = $userProfile->role;
 
         // Base query - if sales, only their customers
         $customerQuery = Customer::query();
@@ -95,8 +99,9 @@ class DashboardController extends Controller
 
     public function todayActions(Request $request)
     {
-        $userId = $request->user()->id;
-        $role = $request->user()->role;
+        $userProfile = $this->getCurrentUserProfile();
+        $userId = $userProfile->id;
+        $role = $userProfile->role;
 
         // Base query - if sales, only their customers
         $query = Customer::query();
@@ -124,8 +129,9 @@ class DashboardController extends Controller
 
     public function weekMeetings(Request $request)
     {
-        $userId = $request->user()->id;
-        $role = $request->user()->role;
+        $userProfile = $this->getCurrentUserProfile();
+        $userId = $userProfile->id;
+        $role = $userProfile->role;
 
         // Base query - if sales, only their customers
         $query = Customer::query();

@@ -14,18 +14,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // 1. Drop old foreign key constraints referencing 'users' table
-        Schema::table('customers', function (Blueprint $table) {
-            $table->dropForeign(['assigned_sales_id']);
-        });
-        
-        Schema::table('interactions', function (Blueprint $table) {
-            $table->dropForeign(['created_by_user_id']);
-        });
-        
-        Schema::table('audit_logs', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-        });
+        // 1. Drop old foreign key constraints referencing 'users' table if they exist
+        foreach (['customers' => 'assigned_sales_id', 'interactions' => 'created_by_user_id', 'audit_logs' => 'user_id', 'invoices' => 'created_by', 'broadcast_email_history' => 'user_id', 'broadcast_email_drafts' => 'user_id'] as $table => $column) {
+            try {
+                Schema::table($table, function (Blueprint $t) use ($column) {
+                    $t->dropForeign([$column]);
+                });
+            } catch (\Exception $e) {
+                // FK might not exist, proceed
+            }
+        }
         
         // 2. Create new foreign key constraints referencing 'user_profiles' table
         Schema::table('customers', function (Blueprint $table) {
@@ -47,6 +45,27 @@ return new class extends Migration
                 ->references('id')
                 ->on('user_profiles')
                 ->nullOnDelete();
+        });
+
+        Schema::table('invoices', function (Blueprint $table) {
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('user_profiles')
+                ->nullOnDelete();
+        });
+
+        Schema::table('broadcast_email_history', function (Blueprint $table) {
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('user_profiles')
+                ->cascadeOnDelete();
+        });
+
+        Schema::table('broadcast_email_drafts', function (Blueprint $table) {
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('user_profiles')
+                ->cascadeOnDelete();
         });
     }
 

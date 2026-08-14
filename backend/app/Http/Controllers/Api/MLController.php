@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\HasTenantUser;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 class MLController extends Controller
 {
+    use HasTenantUser;
     /**
      * Python ML Service base URL
      */
@@ -119,7 +121,7 @@ class MLController extends Controller
     public function predict(Request $request)
     {
         try {
-            $user = Auth::user();
+            $user = $this->getCurrentUserProfile();
             $tenantDb = $this->getTenantDatabase();
             
             $payload = [

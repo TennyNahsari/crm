@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\HasTenantUser;
 use App\Models\EmailSetting;
 use App\Models\Customer;
 use App\Models\Interaction;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Config;
 
 class EmailController extends Controller
 {
+    use HasTenantUser;
+
     public function send(Request $request)
     {
         $validated = $request->validate([
@@ -22,8 +25,8 @@ class EmailController extends Controller
             'attachments.*' => 'nullable|file|max:10240', // Max 10MB per file
         ]);
 
-        $user = $request->user();
-        $emailSetting = EmailSetting::where('user_id', $user->id)->first();
+        $userProfile = $this->getCurrentUserProfile();
+        $emailSetting = EmailSetting::where('user_id', $userProfile->id)->first();
 
         if (!$emailSetting) {
             return response()->json([
@@ -69,7 +72,7 @@ class EmailController extends Controller
                 'summary' => 'Email sent: ' . $validated['subject'],
                 'interaction_at' => now(),
                 'created_by_type' => 'user',
-                'created_by_user_id' => $user->id,
+                'created_by_user_id' => $userProfile->id,
                 'lead_status_snapshot_id' => Customer::find($validated['customer_id'])->lead_status_id,
             ]);
 

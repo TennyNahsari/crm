@@ -44,7 +44,7 @@ class Invoice extends Model
 
     public function createdBy()
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(\App\Models\Tenant\UserProfile::class, 'created_by');
     }
 
     protected static function boot()

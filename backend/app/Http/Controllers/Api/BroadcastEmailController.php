@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\HasTenantUser;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Contact;
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\Config;
 
 class BroadcastEmailController extends Controller
 {
+    use HasTenantUser;
+
     public function getRecipients(Request $request)
     {
         $request->validate([
@@ -23,7 +26,7 @@ class BroadcastEmailController extends Controller
             'area_id' => 'required_if:filter_type,area|exists:areas,id'
         ]);
 
-        $user = auth()->user();
+        $user = $this->getCurrentUserProfile();
         $emails = [];
         $query = Customer::with('contacts');
 
@@ -76,7 +79,7 @@ class BroadcastEmailController extends Controller
             'attachments.*' => 'nullable|file|max:10240', // Max 10MB per file
         ]);
 
-        $user = auth()->user();
+        $user = $this->getCurrentUserProfile();
         $emailSetting = EmailSetting::where('user_id', $user->id)->first();
 
         if (!$emailSetting) {
@@ -172,10 +175,15 @@ class BroadcastEmailController extends Controller
             if (!empty($emailsSent)) {
                 Interaction::create([
                     'customer_id' => $customer->id,
-                    'user_id' => $user->id,
-                    'type' => 'email_broadcast',
-                    'notes' => "Broadcast Email\nTo: " . implode(', ', $emailsSent) . "\nSubject: " . $request->subject . "\n\n" . $request->body,
-                    'interaction_date' => now()
+                    'interaction_type' => 'email_outbound',
+                    'channel' => 'email',
+                    'subject' => $request->subject,
+                    'content' => $request->body,
+                    'summary' => "Broadcast Email to: " . implode(', ', $emailsSent),
+                    'interaction_at' => now(),
+                    'created_by_type' => 'user',
+                    'created_by_user_id' => $user->id,
+                    'lead_status_snapshot_id' => $customer->lead_status_id,
                 ]);
             }
         }
@@ -202,7 +210,7 @@ class BroadcastEmailController extends Controller
 
     public function history()
     {
-        $user = auth()->user();
+        $user = $this->getCurrentUserProfile();
         
         $query = BroadcastEmailHistory::with(['user', 'area'])
             ->orderBy('created_at', 'desc');
@@ -220,7 +228,7 @@ class BroadcastEmailController extends Controller
     // Draft methods
     public function getDrafts()
     {
-        $user = auth()->user();
+        $user = $this->getCurrentUserProfile();
         
         $drafts = BroadcastEmailDraft::with(['user', 'area'])
             ->where('user_id', $user->id)
@@ -232,7 +240,7 @@ class BroadcastEmailController extends Controller
 
     public function getDraft($id)
     {
-        $user = auth()->user();
+        $user = $this->getCurrentUserProfile();
         
         $draft = BroadcastEmailDraft::with(['area'])
             ->where('user_id', $user->id)
@@ -250,7 +258,7 @@ class BroadcastEmailController extends Controller
             'area_id' => 'nullable|exists:areas,id',
         ]);
 
-        $user = auth()->user();
+        $user = $this->getCurrentUserProfile();
 
         $draft = BroadcastEmailDraft::create([
             'user_id' => $user->id,
@@ -275,7 +283,7 @@ class BroadcastEmailController extends Controller
             'area_id' => 'nullable|exists:areas,id',
         ]);
 
-        $user = auth()->user();
+        $user = $this->getCurrentUserProfile();
 
         $draft = BroadcastEmailDraft::where('user_id', $user->id)
             ->findOrFail($id);
@@ -295,7 +303,7 @@ class BroadcastEmailController extends Controller
 
     public function deleteDraft($id)
     {
-        $user = auth()->user();
+        $user = $this->getCurrentUserProfile();
 
         $draft = BroadcastEmailDraft::where('user_id', $user->id)
             ->findOrFail($id);
