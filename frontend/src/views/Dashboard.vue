@@ -1,29 +1,29 @@
 <template>
   <div>
-    <h1 class="text-2xl lg:text-3xl font-bold text-gray-800 mb-6 lg:mb-8">{{ $t('dashboard.title') }}</h1>
+    <h1 class="text-2xl lg:text-3xl font-bold text-navy font-sans tracking-tight mb-6 lg:mb-8">{{ $t('dashboard.title') }}</h1>
 
     <div v-if="loading" class="text-center py-12">
-      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
-      <p class="mt-2 text-gray-600">{{ $t('dashboard.loading') }}</p>
+      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-navy"></div>
+      <p class="mt-2 text-slate-600 font-sans">{{ $t('dashboard.loading') }}</p>
     </div>
 
-    <div v-else-if="stats" class="space-y-6">
+    <div v-else-if="stats" class="space-y-6 font-sans">
       <!-- AI Customer Prediction -->
-      <div class="card bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200">
+      <div class="card bg-gradient-to-br from-white via-ivory to-stone-light/50 border border-gold/40 shadow-card">
         <div class="flex items-center gap-2 sm:gap-3 mb-4">
-          <div class="text-2xl sm:text-3xl">🤖</div>
+          <div class="p-2 bg-navy text-gold rounded-xl text-xl sm:text-2xl shadow-sm">🤖</div>
           <div class="flex-1 min-w-0">
-            <h3 class="text-sm sm:text-base lg:text-lg font-semibold text-gray-800 truncate">{{ $t('dashboard.aiPrediction.title') }}</h3>
-            <p class="text-xs text-gray-600 hidden sm:block">{{ $t('dashboard.aiPrediction.subtitle') }}</p>
+            <h3 class="text-base sm:text-lg font-semibold text-navy truncate">{{ $t('dashboard.aiPrediction.title') }}</h3>
+            <p class="text-xs text-slate-500 hidden sm:block">{{ $t('dashboard.aiPrediction.subtitle') }}</p>
           </div>
         </div>
 
         <!-- Control Buttons -->
-        <div class="flex flex-col sm:flex-row gap-2 mb-4">
+        <div class="flex flex-col sm:flex-row gap-2.5 mb-4">
           <button
             @click="trainModel"
             :disabled="training"
-            class="btn btn-primary flex items-center justify-center gap-2 w-full sm:w-auto text-sm sm:text-base"
+            class="btn btn-primary flex items-center justify-center gap-2 w-full sm:w-auto text-sm"
           >
             <span v-if="training" class="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-white"></span>
             <span>{{ training ? $t('dashboard.aiPrediction.training') : '🔄 ' + $t('dashboard.aiPrediction.trainButton') }}</span>
@@ -31,7 +31,7 @@
           <button
             @click="predict"
             :disabled="predicting || !modelInfo?.model_exists"
-            class="btn btn-secondary flex items-center justify-center gap-2 w-full sm:w-auto text-sm sm:text-base"
+            class="btn btn-gold flex items-center justify-center gap-2 w-full sm:w-auto text-sm shadow-sm"
           >
             <span v-if="predicting" class="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-white"></span>
             <span>{{ predicting ? $t('dashboard.aiPrediction.predicting') : '🎯 ' + $t('dashboard.aiPrediction.predictButton') }}</span>
@@ -187,49 +187,49 @@
         </div>
 
         <!-- Desktop View -->
-          <div class="hidden lg:block overflow-x-auto">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
+        <div class="hidden lg:block table-container">
+          <table class="table-custom">
+            <thead>
               <tr>
-                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">
+                <th class="w-1/4">
                   {{ $t('customers.company') }}
                 </th>
-                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-24">
+                <th class="w-24">
                   {{ $t('customers.area') }}
                 </th>
-                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-24">
+                <th class="w-24">
                   {{ $t('customers.status') }}
                 </th>
-                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-20">
+                <th class="w-20">
                   {{ $t('customers.source') }}
                 </th>
-                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/5">
+                <th class="w-1/5">
                   {{ $t('customers.nextAction') }}
                 </th>
-                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">
+                <th class="w-1/4">
                   {{ $t('customers.lastInteraction') }}
                 </th>
               </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
+            <tbody>
               <tr
                 v-for="customer in todayActions"
                 :key="customer.id"
                 @click="goToDetail(customer.id)"
-                class="hover:bg-gray-50 cursor-pointer transition-colors"
+                class="cursor-pointer"
               >
-                <td class="px-4 py-3">
-                  <div class="text-sm font-medium text-gray-900 truncate max-w-xs">{{ customer.company }}</div>
-                  <div class="text-xs text-gray-500 truncate max-w-xs">{{ customer.email }}</div>
-                  <div v-if="customer.phone" class="text-xs text-gray-500">📞 {{ customer.phone }}</div>
+                <td>
+                  <div class="text-sm font-semibold text-slate-900 truncate max-w-xs">{{ customer.company }}</div>
+                  <div class="text-xs text-slate-500 truncate max-w-xs">{{ customer.email }}</div>
+                  <div v-if="customer.phone" class="text-xs text-slate-500">📞 {{ customer.phone }}</div>
                 </td>
-                <td class="px-3 py-3 text-sm text-gray-900">
+                <td class="text-sm text-slate-800">
                   <div class="truncate max-w-24">{{ customer.area?.name || '-' }}</div>
                 </td>
-                <td class="px-3 py-3">
+                <td>
                   <span
                     v-if="customer.lead_status"
-                    class="badge text-xs px-2 py-1 whitespace-nowrap"
+                    class="badge text-xs px-2.5 py-0.5 rounded-full whitespace-nowrap font-medium"
                     :style="{
                       backgroundColor: customer.lead_status.color + '20',
                       color: customer.lead_status.color,
@@ -238,34 +238,34 @@
                     {{ customer.lead_status.name }}
                   </span>
                 </td>
-                <td class="px-3 py-3">
+                <td>
                   <span
-                    class="badge text-xs px-2 py-1 whitespace-nowrap"
+                    class="badge text-xs px-2.5 py-0.5 rounded-full whitespace-nowrap font-medium"
                     :class="{
-                      'bg-green-100 text-green-800': customer.source === 'inbound',
-                      'bg-blue-100 text-blue-800': customer.source === 'outbound',
+                      'badge-emerald': customer.source === 'inbound',
+                      'badge-sky': customer.source === 'outbound',
                     }"
                   >
                     {{ customer.source }}
                   </span>
                 </td>
-                <td class="px-4 py-3 text-sm">
+                <td class="text-sm">
                   <div v-if="customer.next_action_date">
-                    <div class="text-gray-900 text-xs font-bold">{{ formatDate(customer.next_action_date) }}</div>
-                    <div class="text-gray-500 text-xs truncate max-w-xs">{{ customer.next_action_plan }}</div>
+                    <div class="text-slate-900 text-xs font-bold">{{ formatDate(customer.next_action_date) }}</div>
+                    <div class="text-slate-500 text-xs truncate max-w-xs">{{ customer.next_action_plan }}</div>
                   </div>
-                  <span v-else class="text-gray-400">-</span>
+                  <span v-else class="text-slate-400">-</span>
                 </td>
-                <td class="px-4 py-3 text-sm">
+                <td class="text-sm">
                   <div v-if="customer.interactions && customer.interactions.length > 0">
-                    <div class="text-gray-900 text-xs font-medium">
+                    <div class="text-slate-900 text-xs font-medium">
                       {{ formatDateTime(customer.interactions[0].interaction_at) }}
                     </div>
-                    <div class="text-gray-500 text-xs truncate max-w-xs">
+                    <div class="text-slate-500 text-xs truncate max-w-xs">
                       {{ customer.interactions[0].summary || customer.interactions[0].content || '-' }}
                     </div>
                   </div>
-                  <span v-else class="text-gray-400">{{ $t('customers.noHistory') }}</span>
+                  <span v-else class="text-slate-400">{{ $t('customers.noHistory') }}</span>
                 </td>
               </tr>
             </tbody>
@@ -366,49 +366,49 @@
         </div>
 
         <!-- Desktop View -->
-          <div class="hidden lg:block overflow-x-auto">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
+        <div class="hidden lg:block table-container">
+          <table class="table-custom">
+            <thead>
               <tr>
-                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">
+                <th class="w-1/4">
                   {{ $t('customers.company') }}
                 </th>
-                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-24">
+                <th class="w-24">
                   {{ $t('customers.area') }}
                 </th>
-                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-24">
+                <th class="w-24">
                   {{ $t('customers.status') }}
                 </th>
-                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-20">
+                <th class="w-20">
                   {{ $t('customers.source') }}
                 </th>
-                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/5">
+                <th class="w-1/5">
                   {{ $t('customers.nextAction') }}
                 </th>
-                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">
+                <th class="w-1/4">
                   {{ $t('customers.lastInteraction') }}
                 </th>
               </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
+            <tbody>
               <tr
                 v-for="customer in weekMeetings"
                 :key="customer.id"
                 @click="goToDetail(customer.id)"
-                class="hover:bg-gray-50 cursor-pointer transition-colors"
+                class="cursor-pointer"
               >
-                <td class="px-4 py-3">
-                  <div class="text-sm font-medium text-gray-900 truncate max-w-xs">{{ customer.company }}</div>
-                  <div class="text-xs text-gray-500 truncate max-w-xs">{{ customer.email }}</div>
-                  <div v-if="customer.phone" class="text-xs text-gray-500">📞 {{ customer.phone }}</div>
+                <td>
+                  <div class="text-sm font-semibold text-slate-900 truncate max-w-xs">{{ customer.company }}</div>
+                  <div class="text-xs text-slate-500 truncate max-w-xs">{{ customer.email }}</div>
+                  <div v-if="customer.phone" class="text-xs text-slate-500">📞 {{ customer.phone }}</div>
                 </td>
-                <td class="px-3 py-3 text-sm text-gray-900">
+                <td class="text-sm text-slate-800">
                   <div class="truncate max-w-24">{{ customer.area?.name || '-' }}</div>
                 </td>
-                <td class="px-3 py-3">
+                <td>
                   <span
                     v-if="customer.lead_status"
-                    class="badge text-xs px-2 py-1 whitespace-nowrap"
+                    class="badge text-xs px-2.5 py-0.5 rounded-full whitespace-nowrap font-medium"
                     :style="{
                       backgroundColor: customer.lead_status.color + '20',
                       color: customer.lead_status.color,
@@ -417,34 +417,34 @@
                     {{ customer.lead_status.name }}
                   </span>
                 </td>
-                <td class="px-3 py-3">
+                <td>
                   <span
-                    class="badge text-xs px-2 py-1 whitespace-nowrap"
+                    class="badge text-xs px-2.5 py-0.5 rounded-full whitespace-nowrap font-medium"
                     :class="{
-                      'bg-green-100 text-green-800': customer.source === 'inbound',
-                      'bg-blue-100 text-blue-800': customer.source === 'outbound',
+                      'badge-emerald': customer.source === 'inbound',
+                      'badge-sky': customer.source === 'outbound',
                     }"
                   >
                     {{ customer.source }}
                   </span>
                 </td>
-                <td class="px-4 py-3 text-sm">
+                <td class="text-sm">
                   <div v-if="customer.next_action_date">
-                    <div class="text-gray-900 text-xs font-bold">{{ formatDate(customer.next_action_date) }}</div>
-                    <div class="text-gray-500 text-xs truncate max-w-xs">{{ customer.next_action_plan }}</div>
+                    <div class="text-slate-900 text-xs font-bold">{{ formatDate(customer.next_action_date) }}</div>
+                    <div class="text-slate-500 text-xs truncate max-w-xs">{{ customer.next_action_plan }}</div>
                   </div>
-                  <span v-else class="text-gray-400">-</span>
+                  <span v-else class="text-slate-400">-</span>
                 </td>
-                <td class="px-4 py-3 text-sm">
+                <td class="text-sm">
                   <div v-if="customer.interactions && customer.interactions.length > 0">
-                    <div class="text-gray-900 text-xs font-medium">
+                    <div class="text-slate-900 text-xs font-medium">
                       {{ formatDateTime(customer.interactions[0].interaction_at) }}
                     </div>
-                    <div class="text-gray-500 text-xs truncate max-w-xs">
+                    <div class="text-slate-500 text-xs truncate max-w-xs">
                       {{ customer.interactions[0].summary || customer.interactions[0].content || '-' }}
                     </div>
                   </div>
-                  <span v-else class="text-gray-400">{{ $t('customers.noHistory') }}</span>
+                  <span v-else class="text-slate-400">{{ $t('customers.noHistory') }}</span>
                 </td>
               </tr>
             </tbody>

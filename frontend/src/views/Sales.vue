@@ -1,10 +1,10 @@
 <template>
-  <div class="space-y-6">
+  <div class="space-y-6 font-sans">
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      <h1 class="text-2xl lg:text-3xl font-bold text-gray-800">{{ $t('sales.title') }}</h1>
-      <router-link to="/sales/create" class="btn btn-primary">
-        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <h1 class="text-2xl lg:text-3xl font-bold text-navy tracking-tight">{{ $t('sales.title') }}</h1>
+      <router-link to="/sales/create" class="btn btn-gold shadow-sm">
+        <svg class="w-4 h-4 mr-1 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
         </svg>
         {{ $t('sales.addSales') }}
@@ -13,8 +13,8 @@
 
     <!-- Loading State -->
     <div v-if="loading" class="text-center py-12">
-      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
-      <p class="mt-2 text-gray-600">{{ $t('sales.loadingSales') }}</p>
+      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-navy"></div>
+      <p class="mt-2 text-slate-600">{{ $t('sales.loadingSales') }}</p>
     </div>
 
     <!-- Sales List -->
@@ -23,24 +23,24 @@
         <div
           v-for="user in salesUsers"
           :key="user.id"
-          class="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50"
+          class="flex items-center justify-between p-4 border border-stone/60 rounded-xl hover:bg-ivory transition-colors"
         >
           <div>
-            <h3 class="font-semibold text-gray-900">{{ user.name }}</h3>
-            <p class="text-sm text-gray-600 mt-1">{{ user.email }}</p>
+            <h3 class="font-semibold text-slate-900">{{ user.name }}</h3>
+            <p class="text-sm text-slate-600 mt-0.5">{{ user.email }}</p>
             <div class="flex items-center space-x-2 mt-2">
-              <span class="badge bg-blue-100 text-blue-800 text-xs">
+              <span class="badge badge-sky text-xs">
                 {{ user.role }}
               </span>
               <span
                 v-if="user.is_active"
-                class="badge bg-green-100 text-green-800 text-xs"
+                class="badge badge-emerald text-xs"
               >
                 {{ $t('sales.active') }}
               </span>
               <span
                 v-else
-                class="badge bg-gray-100 text-gray-800 text-xs"
+                class="badge badge-gray text-xs"
               >
                 {{ $t('sales.inactive') }}
               </span>

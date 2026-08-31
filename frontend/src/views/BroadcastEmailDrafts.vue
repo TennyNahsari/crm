@@ -1,23 +1,23 @@
 <template>
-  <div>
+  <div class="font-sans">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 lg:mb-8">
-      <h1 class="text-2xl lg:text-3xl font-bold text-gray-800">{{ $t('broadcastEmail.draftsTitle') }}</h1>
-      <router-link to="/broadcast-email" class="btn btn-primary inline-flex items-center justify-center">
+      <h1 class="text-2xl lg:text-3xl font-bold text-navy tracking-tight">{{ $t('broadcastEmail.draftsTitle') }}</h1>
+      <router-link to="/broadcast-email" class="btn btn-gold inline-flex items-center justify-center shadow-sm">
         ✉️ {{ $t('broadcastEmail.newBroadcast') }}
       </router-link>
     </div>
 
     <div v-if="loading" class="text-center py-12">
-      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
-      <p class="mt-2 text-gray-600">{{ $t('broadcastEmail.loadingDrafts') }}</p>
+      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-navy"></div>
+      <p class="mt-2 text-slate-600">{{ $t('broadcastEmail.loadingDrafts') }}</p>
     </div>
 
     <div v-else-if="drafts.length === 0" class="text-center py-12">
-      <svg class="h-16 w-16 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="h-16 w-16 mx-auto mb-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
       </svg>
-      <p class="text-gray-600 text-lg mb-4">{{ $t('broadcastEmail.noDrafts') }}</p>
-      <router-link to="/broadcast-email" class="btn btn-primary">
+      <p class="text-slate-600 text-lg mb-4">{{ $t('broadcastEmail.noDrafts') }}</p>
+      <router-link to="/broadcast-email" class="btn btn-gold shadow-sm">
         {{ $t('broadcastEmail.createFirstDraft') }}
       </router-link>
     </div>

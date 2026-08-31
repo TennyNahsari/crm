@@ -1,18 +1,18 @@
 <template>
-  <div>
-    <h1 class="text-2xl lg:text-3xl font-bold text-gray-800 mb-6 lg:mb-8">{{ $t('broadcastEmail.historyTitle') }}</h1>
+  <div class="font-sans">
+    <h1 class="text-2xl lg:text-3xl font-bold text-navy tracking-tight mb-6 lg:mb-8">{{ $t('broadcastEmail.historyTitle') }}</h1>
 
     <div v-if="loading" class="text-center py-12">
-      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
-      <p class="mt-2 text-gray-600">{{ $t('broadcastEmail.loading') }}</p>
+      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-navy"></div>
+      <p class="mt-2 text-slate-600">{{ $t('broadcastEmail.loading') }}</p>
     </div>
 
     <div v-else-if="history.length === 0" class="text-center py-12">
-      <svg class="h-16 w-16 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="h-16 w-16 mx-auto mb-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>
-      <p class="text-gray-600 text-lg mb-4">{{ $t('broadcastEmail.noHistory') }}</p>
-      <router-link to="/broadcast-email" class="btn btn-primary">
+      <p class="text-slate-600 text-lg mb-4">{{ $t('broadcastEmail.noHistory') }}</p>
+      <router-link to="/broadcast-email" class="btn btn-gold shadow-sm">
         {{ $t('broadcastEmail.sendFirstBroadcast') }}
       </router-link>
     </div>

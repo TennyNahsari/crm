@@ -1,28 +1,30 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-    <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
+  <div class="min-h-screen flex items-center justify-center bg-[#F8F6F2] px-4 py-12">
+    <div class="max-w-md w-full bg-white rounded-xl shadow-card border border-stone/60 p-8">
       <div class="text-center mb-8">
-        <img src="/logo.png" alt="Logo" class="h-24 mx-auto mb-4" />
-        <h1 class="text-3xl font-bold text-primary-600">FlowCRM</h1>
-        <p class="text-gray-600 mt-2">Customer & Lead Management</p>
+        <div class="inline-flex p-3 bg-navy/5 rounded-2xl mb-3 border border-stone">
+          <img src="/logo.png" alt="Logo" class="h-16 w-auto mx-auto" />
+        </div>
+        <h1 class="font-serif font-bold italic text-3xl text-navy tracking-wide">FlowCRM</h1>
+        <p class="text-slate-500 text-sm mt-1 font-sans">Customer & Lead Management System</p>
       </div>
 
-      <form @submit.prevent="handleLogin" class="space-y-6">
+      <form @submit.prevent="handleLogin" class="space-y-5 font-sans">
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">
-            Email
+          <label class="label">
+            Email Address
           </label>
           <input
             v-model="form.email"
             type="email"
             required
             class="input"
-            placeholder="email@example.com"
+            placeholder="admin@flowcrm.test"
           />
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">
+          <label class="label">
             Password
           </label>
           <input
@@ -34,35 +36,35 @@
           />
         </div>
 
-        <div class="flex items-center">
-          <input
-            v-model="form.remember"
-            type="checkbox"
-            id="remember"
-            class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
-          />
-          <label for="remember" class="ml-2 block text-sm text-gray-700">
-            Remember me
+        <div class="flex items-center justify-between">
+          <label class="flex items-center cursor-pointer">
+            <input
+              v-model="form.remember"
+              type="checkbox"
+              id="remember"
+              class="h-4 w-4 text-gold border-stone rounded focus:ring-gold/30 accent-gold"
+            />
+            <span class="ml-2 text-xs lg:text-sm text-slate-600">Remember me</span>
           </label>
         </div>
 
-        <div v-if="error" class="text-red-600 text-sm">
+        <div v-if="error" class="p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-xs">
           {{ error }}
         </div>
 
         <button
           type="submit"
           :disabled="loading"
-          class="w-full btn btn-primary"
+          class="w-full btn btn-primary py-3 font-semibold shadow-md"
         >
-          {{ loading ? 'Loading...' : 'Login' }}
+          {{ loading ? 'Signing in...' : 'Sign In to Dashboard' }}
         </button>
       </form>
 
-      <div class="mt-6 text-center text-sm text-gray-600">
-        <p>Default credentials:</p>
-        <p>Email: admin@flowcrm.test</p>
-        <p>Password: password</p>
+      <div class="mt-6 pt-6 border-t border-stone text-center text-xs text-slate-500 font-sans space-y-1">
+        <p class="font-medium text-slate-700">Default Demo Credentials:</p>
+        <p><span class="text-slate-400">Email:</span> <code class="bg-stone-light px-1.5 py-0.5 rounded text-navy font-mono text-xs">admin@flowcrm.test</code></p>
+        <p><span class="text-slate-400">Password:</span> <code class="bg-stone-light px-1.5 py-0.5 rounded text-navy font-mono text-xs">password</code></p>
       </div>
     </div>
   </div>

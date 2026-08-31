@@ -1,28 +1,28 @@
 <template>
-  <div class="max-w-2xl mx-auto space-y-6">
+  <div class="max-w-2xl mx-auto space-y-6 font-sans">
     <!-- Header -->
     <div class="flex items-center space-x-4">
-      <button @click="$router.back()" class="text-gray-600 hover:text-gray-900">
+      <button @click="$router.back()" class="text-navy hover:text-gold transition-colors p-1">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
       </button>
-      <h1 class="text-2xl lg:text-3xl font-bold text-gray-800">
+      <h1 class="text-2xl lg:text-3xl font-bold text-navy tracking-tight">
         {{ isEditMode ? $t('areas.editArea') : $t('areas.addArea') }}
       </h1>
     </div>
 
     <!-- Loading State -->
     <div v-if="loading" class="text-center py-12">
-      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
-      <p class="mt-2 text-gray-600">{{ $t('areas.loading') }}</p>
+      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-navy"></div>
+      <p class="mt-2 text-slate-600">{{ $t('areas.loading') }}</p>
     </div>
 
     <!-- Form -->
     <form v-else @submit.prevent="handleSubmit" class="card space-y-6">
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
-          {{ $t('areas.areaName') }} <span class="text-red-500">*</span>
+        <label for="name" class="label">
+          {{ $t('areas.areaName') }} <span class="text-rose-500">*</span>
         </label>
         <input
           id="name"
@@ -35,7 +35,7 @@
       </div>
 
       <div>
-        <label for="description" class="block text-sm font-medium text-gray-700 mb-1">
+        <label for="description" class="label">
           {{ $t('areas.description') }}
         </label>
         <textarea
@@ -48,7 +48,7 @@
       </div>
 
       <div class="flex flex-col sm:flex-row gap-3">
-        <button type="submit" class="btn btn-primary flex-1" :disabled="submitting">
+        <button type="submit" class="btn btn-gold flex-1 shadow-sm" :disabled="submitting">
           {{ submitting ? $t('areas.saving') : (isEditMode ? $t('areas.update') : $t('areas.create')) }} {{ $t('areas.area') }}
         </button>
         <button

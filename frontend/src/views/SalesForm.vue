@@ -1,28 +1,28 @@
 <template>
-  <div class="max-w-2xl mx-auto space-y-6">
+  <div class="max-w-2xl mx-auto space-y-6 font-sans">
     <!-- Header -->
     <div class="flex items-center space-x-4">
-      <button @click="$router.back()" class="text-gray-600 hover:text-gray-900">
+      <button @click="$router.back()" class="text-navy hover:text-gold transition-colors p-1">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
       </button>
-      <h1 class="text-2xl lg:text-3xl font-bold text-gray-800">
+      <h1 class="text-2xl lg:text-3xl font-bold text-navy tracking-tight">
         {{ isEditMode ? $t('sales.editSales') : $t('sales.addSales') }}
       </h1>
     </div>
 
     <!-- Loading State -->
     <div v-if="loading" class="text-center py-12">
-      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
-      <p class="mt-2 text-gray-600">{{ $t('sales.loading') }}</p>
+      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-navy"></div>
+      <p class="mt-2 text-slate-600">{{ $t('sales.loading') }}</p>
     </div>
 
     <!-- Form -->
     <form v-else @submit.prevent="handleSubmit" class="card space-y-6">
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
-          {{ $t('sales.fullName') }} <span class="text-red-500">*</span>
+        <label for="name" class="label">
+          {{ $t('sales.fullName') }} <span class="text-rose-500">*</span>
         </label>
         <input
           id="name"
@@ -35,8 +35,8 @@
       </div>
 
       <div>
-        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
-          {{ $t('sales.email') }} <span class="text-red-500">*</span>
+        <label for="email" class="label">
+          {{ $t('sales.email') }} <span class="text-rose-500">*</span>
         </label>
         <input
           id="email"
@@ -49,8 +49,8 @@
       </div>
 
       <div v-if="!isEditMode">
-        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
-          {{ $t('sales.password') }} <span class="text-red-500">*</span>
+        <label for="password" class="label">
+          {{ $t('sales.password') }} <span class="text-rose-500">*</span>
         </label>
         <input
           id="password"
@@ -82,14 +82,14 @@
           <input
             v-model="form.is_active"
             type="checkbox"
-            class="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+            class="rounded border-stone text-gold focus:ring-gold/30 accent-gold"
           />
-          <span class="ml-2 text-sm text-gray-700">{{ $t('sales.activeUser') }}</span>
+          <span class="ml-2 text-sm text-slate-700">{{ $t('sales.activeUser') }}</span>
         </label>
       </div>
 
       <div class="flex flex-col sm:flex-row gap-3">
-        <button type="submit" class="btn btn-primary flex-1" :disabled="submitting">
+        <button type="submit" class="btn btn-gold flex-1 shadow-sm" :disabled="submitting">
           {{ submitting ? $t('sales.saving') : (isEditMode ? $t('sales.update') : $t('sales.create')) }} {{ $t('sales.sales') }}
         </button>
         <button

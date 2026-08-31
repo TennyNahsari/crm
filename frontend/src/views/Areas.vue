@@ -1,10 +1,10 @@
 <template>
-  <div class="space-y-6">
+  <div class="space-y-6 font-sans">
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      <h1 class="text-2xl lg:text-3xl font-bold text-gray-800">{{ $t('areas.title') }}</h1>
-      <router-link to="/areas/create" class="btn btn-primary">
-        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <h1 class="text-2xl lg:text-3xl font-bold text-navy tracking-tight">{{ $t('areas.title') }}</h1>
+      <router-link to="/areas/create" class="btn btn-gold shadow-sm">
+        <svg class="w-4 h-4 mr-1 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
         </svg>
         {{ $t('areas.addArea') }}
@@ -13,8 +13,8 @@
 
     <!-- Loading State -->
     <div v-if="loading" class="text-center py-12">
-      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
-      <p class="mt-2 text-gray-600">{{ $t('areas.loadingAreas') }}</p>
+      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-navy"></div>
+      <p class="mt-2 text-slate-600">{{ $t('areas.loadingAreas') }}</p>
     </div>
 
     <!-- Areas List -->

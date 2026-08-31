@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
-      <h1 class="text-3xl font-bold text-gray-800 mb-4 lg:mb-0">{{ $t('customers.title') }}</h1>
-      <div class="flex flex-col sm:flex-row gap-2">
+      <h1 class="text-2xl lg:text-3xl font-bold text-navy font-sans tracking-tight mb-4 lg:mb-0">{{ $t('customers.title') }}</h1>
+      <div class="flex flex-col sm:flex-row gap-2.5">
         <button
           @click="exportToExcel"
           :disabled="exportLoading"
-          class="btn btn-secondary inline-flex items-center justify-center"
+          class="btn btn-gold inline-flex items-center justify-center shadow-sm"
         >
-          <svg v-if="!exportLoading" class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg v-if="!exportLoading" class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
-          <svg v-else class="animate-spin h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24">
+          <svg v-else class="animate-spin h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
@@ -19,9 +19,9 @@
         </button>
         <router-link
           to="/customers/create"
-          class="btn btn-primary inline-flex items-center justify-center"
+          class="btn btn-primary inline-flex items-center justify-center shadow-sm"
         >
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 mr-2 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
           </svg>
           {{ $t('customers.addCustomer') }}
@@ -158,49 +158,49 @@
       </div>
 
       <!-- Desktop View -->
-      <div class="hidden lg:block card overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
+      <div class="hidden lg:block table-container">
+        <table class="table-custom">
+          <thead>
             <tr>
-              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">
+              <th class="w-1/4">
                 {{ $t('customers.company') }}
               </th>
-              <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-24">
+              <th class="w-24">
                 {{ $t('customers.area') }}
               </th>
-              <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-24">
+              <th class="w-24">
                 {{ $t('customers.status') }}
               </th>
-              <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-20">
+              <th class="w-20">
                 {{ $t('customers.source') }}
               </th>
-              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/5">
+              <th class="w-1/5">
                 {{ $t('customers.nextAction') }}
               </th>
-              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">
+              <th class="w-1/4">
                 {{ $t('customers.lastInteraction') }}
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
+          <tbody>
             <tr
               v-for="customer in customers"
               :key="customer.id"
               @click="goToDetail(customer.id)"
-              class="hover:bg-gray-50 cursor-pointer transition-colors"
+              class="cursor-pointer"
             >
-              <td class="px-4 py-3">
-                <div class="text-sm font-medium text-gray-900 truncate max-w-xs">{{ customer.company }}</div>
-                <div class="text-xs text-gray-500 truncate max-w-xs">{{ customer.email }}</div>
-                <div v-if="customer.phone" class="text-xs text-gray-500">📞 {{ customer.phone }}</div>
+              <td>
+                <div class="text-sm font-semibold text-slate-900 truncate max-w-xs">{{ customer.company }}</div>
+                <div class="text-xs text-slate-500 truncate max-w-xs">{{ customer.email }}</div>
+                <div v-if="customer.phone" class="text-xs text-slate-500">📞 {{ customer.phone }}</div>
               </td>
-              <td class="px-3 py-3 text-sm text-gray-900">
+              <td class="text-sm text-slate-800">
                 <div class="truncate max-w-24">{{ customer.area?.name || '-' }}</div>
               </td>
-              <td class="px-3 py-3">
+              <td>
                 <span
                   v-if="customer.lead_status"
-                  class="badge text-xs px-2 py-1 whitespace-nowrap"
+                  class="badge text-xs px-2.5 py-0.5 rounded-full whitespace-nowrap font-medium"
                   :style="{
                     backgroundColor: customer.lead_status.color + '20',
                     color: customer.lead_status.color,
@@ -209,34 +209,34 @@
                   {{ customer.lead_status.name }}
                 </span>
               </td>
-              <td class="px-3 py-3">
+              <td>
                 <span
-                  class="badge text-xs px-2 py-1 whitespace-nowrap"
+                  class="badge text-xs px-2.5 py-0.5 rounded-full whitespace-nowrap font-medium"
                   :class="{
-                    'bg-green-100 text-green-800': customer.source === 'inbound',
-                    'bg-blue-100 text-blue-800': customer.source === 'outbound',
+                    'badge-emerald': customer.source === 'inbound',
+                    'badge-sky': customer.source === 'outbound',
                   }"
                 >
                   {{ customer.source }}
                 </span>
               </td>
-              <td class="px-4 py-3 text-sm">
+              <td class="text-sm">
                 <div v-if="customer.next_action_date">
-                  <div class="text-gray-900 text-xs font-bold">{{ formatDate(customer.next_action_date) }}</div>
-                  <div class="text-gray-500 text-xs truncate max-w-xs">{{ customer.next_action_plan }}</div>
+                  <div class="text-slate-900 text-xs font-bold">{{ formatDate(customer.next_action_date) }}</div>
+                  <div class="text-slate-500 text-xs truncate max-w-xs">{{ customer.next_action_plan }}</div>
                 </div>
-                <span v-else class="text-gray-400">-</span>
+                <span v-else class="text-slate-400">-</span>
               </td>
-              <td class="px-4 py-3 text-sm">
+              <td class="text-sm">
                 <div v-if="customer.interactions && customer.interactions.length > 0">
-                  <div class="text-gray-900 text-xs font-medium">
+                  <div class="text-slate-900 text-xs font-medium">
                     {{ formatDateTime(customer.interactions[0].interaction_at) }}
                   </div>
-                  <div class="text-gray-500 text-xs truncate max-w-xs">
+                  <div class="text-slate-500 text-xs truncate max-w-xs">
                     {{ customer.interactions[0].summary || customer.interactions[0].content || '-' }}
                   </div>
                 </div>
-                <span v-else class="text-gray-400">{{ $t('customers.noHistory') }}</span>
+                <span v-else class="text-slate-400">{{ $t('customers.noHistory') }}</span>
               </td>
             </tr>
           </tbody>

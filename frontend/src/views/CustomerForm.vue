@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="font-sans">
     <div class="flex items-center gap-4 mb-6">
-      <button @click="$router.back()" class="text-gray-600 hover:text-gray-900 flex-shrink-0">
+      <button @click="$router.back()" class="text-navy hover:text-gold flex-shrink-0 transition-colors p-1">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
       </button>
-      <h1 class="text-xl lg:text-3xl font-bold text-gray-800">{{ isEditMode ? $t('customerForm.editTitle') : $t('customerForm.addTitle') }}</h1>
+      <h1 class="text-2xl lg:text-3xl font-bold text-navy tracking-tight">{{ isEditMode ? $t('customerForm.editTitle') : $t('customerForm.addTitle') }}</h1>
     </div>
 
     <div class="card max-w-3xl">
@@ -139,7 +139,7 @@
           <button
             type="submit"
             :disabled="loading"
-            class="btn btn-primary flex-1"
+            class="btn btn-gold flex-1 shadow-sm"
           >
             {{ loading ? (isEditMode ? $t('customerForm.updating') : $t('customerForm.creating')) : (isEditMode ? $t('customerForm.updateCustomer') : $t('customerForm.createCustomer')) }}
           </button>
