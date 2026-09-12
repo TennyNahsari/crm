@@ -14,6 +14,7 @@ use App\Models\BroadcastEmailHistory;
 use App\Models\BroadcastEmailDraft;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
 
 class BroadcastEmailController extends Controller
 {
@@ -23,7 +24,7 @@ class BroadcastEmailController extends Controller
     {
         $request->validate([
             'filter_type' => 'required|in:all,area',
-            'area_id' => 'required_if:filter_type,area|exists:areas,id'
+            'area_id' => 'nullable|required_if:filter_type,area|exists:areas,id'
         ]);
 
         $user = $this->getCurrentUserProfile();
@@ -82,20 +83,28 @@ class BroadcastEmailController extends Controller
         $user = $this->getCurrentUserProfile();
         $emailSetting = EmailSetting::where('user_id', $user->id)->first();
 
-        if (!$emailSetting) {
+        if (!$emailSetting || empty($emailSetting->mail_host) || empty($emailSetting->mail_username)) {
             return response()->json([
-                'message' => 'Please configure your email settings first'
+                'message' => 'Silakan konfigurasi Pengaturan Email (SMTP) Anda terlebih dahulu.'
             ], 400);
         }
 
+        // Clean single from email address (prevent 550 spoofed email error)
+        $rawFrom = $emailSetting->mail_from_address ?: $emailSetting->mail_username;
+        $fromAddress = trim(explode(',', $rawFrom)[0]);
+        $fromName = $emailSetting->mail_from_name ?: 'FlowCRM';
+
         // Configure mail
+        Config::set('mail.default', 'smtp');
+        Config::set('mail.mailers.smtp.transport', 'smtp');
         Config::set('mail.mailers.smtp.host', $emailSetting->mail_host);
         Config::set('mail.mailers.smtp.port', $emailSetting->mail_port);
         Config::set('mail.mailers.smtp.username', $emailSetting->mail_username);
         Config::set('mail.mailers.smtp.password', $emailSetting->mail_password);
         Config::set('mail.mailers.smtp.encryption', $emailSetting->mail_encryption);
-        Config::set('mail.from.address', $emailSetting->mail_from_address);
-        Config::set('mail.from.name', $emailSetting->mail_from_name);
+        Config::set('mail.from.address', $fromAddress);
+        Config::set('mail.from.name', $fromName);
+        Mail::purge('smtp');
 
         // Get recipients with role-based filtering
         $query = Customer::with('contacts');
@@ -120,8 +129,9 @@ class BroadcastEmailController extends Controller
             // Send to company email
             if ($customer->email) {
                 try {
-                    Mail::send([], [], function ($message) use ($customer, $request) {
+                    Mail::send([], [], function ($message) use ($customer, $request, $fromAddress, $fromName) {
                         $message->to($customer->email)
+                                ->from($fromAddress, $fromName)
                                 ->subject($request->subject)
                                 ->html($request->body);
                         
@@ -139,7 +149,8 @@ class BroadcastEmailController extends Controller
                     $allRecipients[] = $customer->email;
                     $sentCount++;
                 } catch (\Exception $e) {
-                    $failedEmails[] = $customer->email;
+                    Log::error("Broadcast email error for {$customer->email}: " . $e->getMessage());
+                    $failedEmails[] = $customer->email . ' (' . $e->getMessage() . ')';
                 }
             }
 
@@ -147,8 +158,9 @@ class BroadcastEmailController extends Controller
             foreach ($customer->contacts as $contact) {
                 if ($contact->email) {
                     try {
-                        Mail::send([], [], function ($message) use ($contact, $request) {
+                        Mail::send([], [], function ($message) use ($contact, $request, $fromAddress, $fromName) {
                             $message->to($contact->email)
+                                    ->from($fromAddress, $fromName)
                                     ->subject($request->subject)
                                     ->html($request->body);
                             
@@ -166,7 +178,8 @@ class BroadcastEmailController extends Controller
                         $allRecipients[] = $contact->email;
                         $sentCount++;
                     } catch (\Exception $e) {
-                        $failedEmails[] = $contact->email;
+                        Log::error("Broadcast email error for PIC {$contact->email}: " . $e->getMessage());
+                        $failedEmails[] = $contact->email . ' (' . $e->getMessage() . ')';
                     }
                 }
             }
@@ -193,59 +206,51 @@ class BroadcastEmailController extends Controller
             'user_id' => $user->id,
             'subject' => $request->subject,
             'body' => $request->body,
-            'filter_type' => $request->filter_type,
+            'filter_type' => $request->filter_type ?? 'all',
             'area_id' => $request->area_id,
-            'recipient_count' => $sentCount,
             'recipients' => $allRecipients,
+            'recipient_count' => count($allRecipients),
             'has_attachments' => $request->hasFile('attachments'),
         ]);
 
         return response()->json([
-            'message' => 'Broadcast email sent successfully',
+            'message' => 'Broadcast email process completed',
             'sent_count' => $sentCount,
             'failed_count' => count($failedEmails),
-            'failed_emails' => $failedEmails
+            'failed_emails' => $failedEmails,
         ]);
     }
 
-    public function history()
+    public function history(Request $request)
     {
         $user = $this->getCurrentUserProfile();
-        
-        $query = BroadcastEmailHistory::with(['user', 'area'])
-            ->orderBy('created_at', 'desc');
-        
-        // Only admin can see all history, others see only their own
+        $query = BroadcastEmailHistory::with('user');
+
         if ($user->role !== 'admin') {
             $query->where('user_id', $user->id);
         }
-        
-        $history = $query->get();
-        
+
+        $history = $query->orderBy('sent_at', 'desc')->paginate(10);
         return response()->json($history);
     }
 
-    // Draft methods
-    public function getDrafts()
+    public function getDrafts(Request $request)
     {
         $user = $this->getCurrentUserProfile();
-        
-        $drafts = BroadcastEmailDraft::with(['user', 'area'])
-            ->where('user_id', $user->id)
+        $drafts = BroadcastEmailDraft::where('user_id', $user->id)
             ->orderBy('updated_at', 'desc')
             ->get();
-        
+
         return response()->json($drafts);
     }
 
     public function getDraft($id)
     {
         $user = $this->getCurrentUserProfile();
-        
-        $draft = BroadcastEmailDraft::with(['area'])
+        $draft = BroadcastEmailDraft::where('id', $id)
             ->where('user_id', $user->id)
-            ->findOrFail($id);
-        
+            ->firstOrFail();
+
         return response()->json($draft);
     }
 
@@ -264,14 +269,14 @@ class BroadcastEmailController extends Controller
             'user_id' => $user->id,
             'subject' => $request->subject,
             'body' => $request->body,
-            'filter_type' => $request->filter_type,
+            'filter_type' => $request->filter_type ?? 'all',
             'area_id' => $request->area_id,
         ]);
 
         return response()->json([
             'message' => 'Draft saved successfully',
             'draft' => $draft
-        ], 201);
+        ]);
     }
 
     public function updateDraft(Request $request, $id)
@@ -284,14 +289,14 @@ class BroadcastEmailController extends Controller
         ]);
 
         $user = $this->getCurrentUserProfile();
-
-        $draft = BroadcastEmailDraft::where('user_id', $user->id)
-            ->findOrFail($id);
+        $draft = BroadcastEmailDraft::where('id', $id)
+            ->where('user_id', $user->id)
+            ->firstOrFail();
 
         $draft->update([
             'subject' => $request->subject,
             'body' => $request->body,
-            'filter_type' => $request->filter_type,
+            'filter_type' => $request->filter_type ?? 'all',
             'area_id' => $request->area_id,
         ]);
 
@@ -304,9 +309,9 @@ class BroadcastEmailController extends Controller
     public function deleteDraft($id)
     {
         $user = $this->getCurrentUserProfile();
-
-        $draft = BroadcastEmailDraft::where('user_id', $user->id)
-            ->findOrFail($id);
+        $draft = BroadcastEmailDraft::where('id', $id)
+            ->where('user_id', $user->id)
+            ->firstOrFail();
 
         $draft->delete();
 

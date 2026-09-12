@@ -3,11 +3,87 @@ export default {
   header: {
     logout: 'Keluar'
   },
+
+  // Landing Page
+  landing: {
+    badge: 'CRM & Manajemen Penjualan Berbasis AI',
+    heroTitle: 'Akselerasi Penjualan & Relasi Pelanggan dengan Kecerdasan AI',
+    heroSubtitle: 'Portal CRM lengkap dengan prediksi pelanggan berbasis AI, broadcast email otomatis, manajemen faktur & penawaran, serta penjadwalan tugas pintar.',
+    getStarted: 'Mulai Sekarang',
+    goToDashboard: 'Buka Beranda',
+    signIn: 'Masuk (Login)',
+    learnMore: 'Jelajahi Fitur',
+    stats: {
+      customers: 'Pelanggan Aktif Dikelola',
+      accuracy: 'Akurasi Prediksi AI',
+      invoices: 'Invoice Diterbitkan',
+      deliveryRate: 'Tingkat Pengiriman Email'
+    },
+    nav: {
+      features: 'Fitur Unggulan',
+      customersDb: 'Database Pelanggan',
+      commHistory: 'Riwayat Komunikasi',
+      aiPrediction: 'Prediksi AI',
+      broadcastEmail: 'Broadcast Email',
+      invoices: 'Invoice & Penawaran',
+      calendar: 'Kalender Tugas',
+      login: 'Masuk'
+    },
+    sections: {
+      customerDbTitle: 'Database Pelanggan 360° & Pipeline',
+      customerDbDesc: 'Kelola data profil pelanggan secara terpusat, alokasi tim sales, klasifikasi wilayah (area), status prospek, serta pelacakan deal pipeline (Kanban Board) dalam satu sistem.',
+      customerDbFeature1: 'Profil pelanggan lengkap (Kontak PIC, WhatsApp, email & bidang usaha)',
+      customerDbFeature2: 'Visualisasi Deal Pipeline interaktif dengan tahapan corong penjualan',
+      customerDbFeature3: 'Segmentasi wilayah (Area) & penugasan Sales Person khusus',
+
+      commHistoryTitle: 'Riwayat Komunikasi & Timeline Interaksi',
+      commHistoryDesc: 'Pantau seluruh riwayat interaksi pelanggan dari berbagai saluran — mulai dari email masuk/keluar, log obrolan WhatsApp, catatan panggilan, hingga rincian rapat secara kronologis.',
+      commHistoryFeature1: 'Timeline kronologis otomatis dari setiap interaksi & riwayat komunikasi',
+      commHistoryFeature2: 'Integrasi catatan follow-up & log komunikasi WhatsApp cepat',
+      commHistoryFeature3: 'Pengiriman email balasan & riwayat percakapan langsung dari lembar pelanggan',
+
+      aiTitle: 'Prediksi Potensi Customer Berbasis AI',
+      aiDesc: 'Manfaatkan model Machine Learning untuk menganalisis parameter pelanggan secara otomatis dan memprediksi calon pelanggan paling potensial.',
+      aiFeature1: 'Pelatihan model ML otomatis dari data pelanggan riil',
+      aiFeature2: 'Peringkat & skor potensial pelanggan secara real-time',
+      aiFeature3: 'Wawasan berbasis data untuk prioritas aksi tim sales',
+
+      emailTitle: 'Mesin Broadcast Email SMTP & IMAP',
+      emailDesc: 'Kirim kampanye email masal langsung dari CRM Anda. Sinkronkan balasan pelanggan masuk secara otomatis dengan IMAP sync.',
+      emailFeature1: 'Broadcast terarah berdasarkan filter area & perusahaan',
+      emailFeature2: 'Sinkronisasi email masuk (IMAP) dengan antrean aksi otomatis',
+      emailFeature3: 'Riwayat draf, editor HTML kaya & lampiran file',
+
+      invoiceTitle: 'Manajemen Invoice & Penawaran Praktis',
+      invoiceDesc: 'Buat, kelola, dan pantau penawaran harga (quotation), faktur penjualan, dan status pembayaran dengan mudah.',
+      invoiceFeature1: 'Pembuatan PDF penawaran & faktur instan',
+      invoiceFeature2: 'Pelacakan status pembayaran (Lunas, Terkirim, Draf, Batal)',
+      invoiceFeature3: 'Kalkulasi otomatis Pajak (PPN) dan potongan diskon',
+
+      calendarTitle: 'Kalender Tugas & Follow-Up Pintar',
+      calendarDesc: 'Jaga keteraturan tim sales Anda dengan kalender tugas interaktif dan skala prioritas rencana aksi.',
+      calendarFeature1: 'Jadwal bulanan visual untuk pertemuan dan follow-up',
+      calendarFeature2: 'Klasifikasi prioritas aksi (Tinggi, Sedang, Rendah)',
+      calendarFeature3: 'Tombol aksi cepat Chat WhatsApp & Kirim Email'
+    },
+    cta: {
+      title: 'Siap Mentransformasi Manajemen Pelanggan Anda?',
+      subtitle: 'Rasakan kemudahan prediksi AI dan alur kerja CRM yang efisien sekarang.',
+      button: 'Buka Portal FlowCRM'
+    },
+    footer: {
+      tagline: 'Platform CRM Pintar & Customer Intelligence',
+      copyright: 'FlowCRM Management Portal &copy; 2026. Hak cipta dilindungi.'
+    }
+  },
   
   // Sidebar
   sidebar: {
     dashboard: 'Beranda',
     customers: 'Pelanggan',
+    pipeline: 'Pipeline Kanban',
+    calendar: 'Kalender Tasks',
+    invoices: 'Faktur & Invoice',
     broadcastEmail: 'Broadcast Email',
     sendBroadcast: 'Kirim Broadcast',
     drafts: 'Draf',
@@ -268,6 +344,8 @@ export default {
     loading: 'Memuat...',
     note: 'Catatan:',
     noteText: 'Konfigurasikan pengaturan email Anda untuk mengirim email langsung dari CRM. Pengaturan ini bersifat pribadi dan hanya digunakan untuk akun Anda.',
+    smtpTitle: 'Email Keluar (Konfigurasi SMTP)',
+    testSmtp: 'Tes Koneksi SMTP',
     mailServer: 'Server Email (SMTP Host)',
     mailServerExample: 'Contoh: smtp.gmail.com, smtp.office365.com',
     port: 'Port',
@@ -275,11 +353,13 @@ export default {
     encryption: 'Enkripsi',
     tls: 'TLS',
     ssl: 'SSL',
+    none: 'Tanpa Enkripsi',
     emailUsername: 'Username Email',
     emailUsernamePlaceholder: "email-anda{'@'}contoh.com",
     emailUsernameHelp: 'Alamat email Anda untuk autentikasi SMTP',
     emailPassword: 'Password Email',
     emailPasswordPlaceholder: 'Masukkan password email atau app password',
+    smtpPasswordHelp: 'Gunakan password email cPanel/webmail atau App Password. Biarkan ******** jika tidak diubah.',
     emailPasswordHelp: 'Untuk Gmail, gunakan App Password (bukan password biasa Anda).',
     learnMore: 'Pelajari lebih lanjut',
     fromAddress: 'Alamat Email Pengirim',
@@ -292,7 +372,26 @@ export default {
     updateSuccess: 'Pengaturan email berhasil diperbarui!',
     saveSuccess: 'Pengaturan email berhasil disimpan!',
     saveError: 'Gagal menyimpan pengaturan email',
-    required: '*'
+    required: '*',
+    imapTitle: 'Pengaturan Email Masuk (IMAP Sync & Auto Queue)',
+    enableImap: 'Aktifkan Sinkronisasi Email Masuk (IMAP)',
+    imapHost: 'Server IMAP Host',
+    imapHostExample: 'Contoh: imap.gmail.com, imap.mail.yahoo.com',
+    imapPort: 'Port IMAP',
+    imapPortExample: 'Biasanya 993 untuk SSL/TLS',
+    imapUsername: 'Username IMAP',
+    imapPassword: 'Password / App Password IMAP',
+    imapPasswordHelp: 'Biarkan berisi ******** jika tidak ingin mengubah password yang tersimpan.',
+    neverSynced: 'Belum pernah disinkronkan',
+    testImap: 'Tes Koneksi IMAP',
+    syncNow: 'Sinkronkan Email Sekarang',
+    lastSync: 'Terakhir disinkronkan: {time}',
+    smtpTestSuccess: 'Koneksi SMTP Berhasil!\n\nPengaturan SMTP Anda akan disimpan otomatis.',
+    smtpTestError: 'Gagal Otentikasi SMTP: ',
+    imapTestSuccess: 'Koneksi IMAP Berhasil!\n\nPengaturan IMAP Anda akan disimpan otomatis.',
+    imapTestError: 'Gagal tes koneksi IMAP: ',
+    syncSuccess: 'Sinkronisasi email berhasil!',
+    syncError: 'Gagal sinkronisasi email: '
   },
   
   // Sales Page
@@ -363,5 +462,202 @@ export default {
     saveError: 'Gagal menyimpan area',
     loadError: 'Gagal memuat area',
     required: '*'
+  },
+  
+  // Invoices
+  invoices: {
+    title: 'Invoice & Penawaran',
+    subtitle: 'Kelola faktur penjualan, status pembayaran, dan penawaran harga',
+    createInvoice: 'Buat Invoice Baru',
+    editInvoice: 'Edit Invoice',
+    invoiceDetail: 'Rincian Invoice',
+    stats: {
+      totalInvoiced: 'Total Invoiced',
+      totalCount: '{count} Total Faktur',
+      paidAmount: 'Lunas (Paid)',
+      paidCount: '{count} Faktur Lunas',
+      unpaidAmount: 'Belum Lunas (Sent)',
+      unpaidCount: '{count} Menunggu Pembayaran',
+      draftCancelled: 'Draf / Batal',
+      draftCancelledCount: '{draft} Draf, {cancelled} Batal'
+    },
+    filters: {
+      searchPlaceholder: 'Cari no. invoice atau customer...',
+      allStatuses: 'Semua Status',
+      draftQuotation: 'Draf Penawaran (Quotation)',
+      sentQuotation: 'Penawaran Terkirim (Sent)',
+      paid: 'Lunas (Paid)',
+      cancelled: 'Dibatalkan'
+    },
+    loading: 'Memuat data invoice...',
+    emptyState: {
+      title: 'Belum ada Invoice',
+      description: 'Faktur tagihan atau penawaran harga yang Anda buat akan tampil di sini.',
+      createFirst: 'Buat Invoice Pertama'
+    },
+    table: {
+      invoiceNumber: 'No. Invoice',
+      customer: 'Pelanggan',
+      invoiceDate: 'Tgl Invoice',
+      dueDate: 'Jatuh Tempo',
+      total: 'Total',
+      status: 'Status',
+      actions: 'Aksi',
+      noCustomer: 'Tanpa Customer',
+      detail: 'Detail',
+      edit: 'Edit',
+      delete: 'Hapus'
+    },
+    pagination: {
+      info: 'Halaman {current} dari {last} (Total {total} invoice)',
+      previous: 'Sebelumnya',
+      next: 'Selanjutnya'
+    },
+    status: {
+      paid: 'LUNAS',
+      sent: 'TERKIRIM',
+      draft: 'DRAF',
+      cancelled: 'BATAL'
+    },
+    confirmDelete: 'Apakah Anda yakin ingin menghapus invoice {number}?',
+    deleteError: 'Gagal menghapus invoice',
+
+    // Invoice Form
+    form: {
+      createTitle: 'Buat Invoice Baru',
+      editTitle: 'Edit Invoice',
+      createSubtitle: 'Isi rincian transaksi dan pilih pelanggan',
+      editSubtitle: 'Perbarui data rincian faktur',
+      backToList: 'Kembali ke Daftar',
+      loadingForm: 'Memuat formulir...',
+      sectionCustomer: 'Informasi Pelanggan & Tanggal',
+      sectionItems: 'Rincian Produk / Jasa',
+      sectionNotes: 'Catatan / Syarat & Ketentuan',
+      customerLabel: 'Pelanggan / Customer',
+      selectCustomer: '-- Pilih Pelanggan --',
+      invoiceNumberLabel: 'Nomor Invoice (Opsional)',
+      invoiceNumberPlaceholder: 'Auto-generate jika dikosongkan (contoh: INV-20260911-0001)',
+      statusLabel: 'Status Invoice',
+      invoiceDateLabel: 'Tanggal Invoice',
+      dueDateLabel: 'Jatuh Tempo (Due Date)',
+      statusOptions: {
+        draft: 'Draf (Draft)',
+        sent: 'Terkirim (Sent)',
+        paid: 'Lunas (Paid)',
+        cancelled: 'Dibatalkan (Cancelled)'
+      },
+      addItem: 'Tambah Item',
+      itemNameLabel: 'Nama Item / Layanan',
+      itemNamePlaceholder: 'contoh: Layanan Konsultasi CRM / Lisensi Software',
+      qtyLabel: 'Qty',
+      unitPriceLabel: 'Harga Satuan (Rp)',
+      subtotalLabel: 'Subtotal',
+      removeRow: 'Hapus Baris',
+      notesLabel: 'Catatan / Syarat & Ketentuan',
+      notesPlaceholder: 'Terima kasih atas kerja samanya. Pembayaran dapat ditransfer ke rekening BCA 1234567890 a/n PT FlowCRM.',
+      itemsSubtotal: 'Subtotal Item',
+      taxLabel: 'Pajak (PPN/Tax)',
+      taxPlaceholder: 'Rp 0',
+      discountLabel: 'Diskon / Potongan',
+      discountPlaceholder: 'Rp 0',
+      grandTotal: 'Grand Total',
+      cancel: 'Batal',
+      saving: 'Menyimpan...',
+      updateInvoice: 'Perbarui Invoice',
+      saveInvoice: 'Simpan Invoice',
+      selectCustomerAlert: 'Silakan pilih pelanggan terlebih dahulu',
+      loadInvoiceError: 'Gagal memuat data invoice',
+      saveInvoiceError: 'Gagal menyimpan invoice'
+    },
+
+    // Invoice Detail & Print
+    detailView: {
+      backToList: 'Kembali ke Daftar',
+      printPdf: 'Cetak / Simpan PDF',
+      markPaid: 'Tandai Lunas (Paid)',
+      edit: 'Edit',
+      loading: 'Memuat rincian invoice...',
+      titleQuotation: 'QUOTATION',
+      subtitleQuotation: 'Penawaran Harga',
+      titleProforma: 'PROFORMA INVOICE',
+      subtitleProforma: 'Penawaran Terkirim',
+      titleInvoice: 'INVOICE',
+      subtitleInvoice: 'Faktur Penjualan',
+      billedTo: 'Ditagihkan Kepada:',
+      attn: 'Attn:',
+      issuedDate: 'Tanggal Diterbitkan:',
+      dueDate: 'Jatuh Tempo:',
+      itemDescription: 'Deskripsi Item / Layanan',
+      qty: 'Qty',
+      unitPrice: 'Harga Satuan',
+      total: 'Total',
+      notes: 'Catatan:',
+      defaultNotes: 'Terima kasih atas kepercayaan Anda.',
+      subtotal: 'Subtotal',
+      tax: 'Pajak (Tax)',
+      discount: 'Diskon',
+      totalAmount: 'Total Tagihan',
+      paymentMethod: 'Metode Pembayaran:',
+      bankTransfer: 'Transfer Bank BCA / Mandiri',
+      billingDept: 'FlowCRM Billing Dept.',
+      authorizedSignature: 'Tanda Tangan Authorized',
+      notFoundAlert: 'Invoice tidak ditemukan',
+      updateStatusError: 'Gagal mengubah status invoice'
+    }
+  },
+
+  // Calendar
+  calendar: {
+    title: 'Kalender Tugas & Follow-Up',
+    subtitle: 'Jadwal rencana aksi, pertemuan, dan follow-up pelanggan',
+    today: 'Hari Ini',
+    priority: 'Prioritas:',
+    allPriorities: 'Semua Prioritas',
+    priorityHigh: 'Tinggi (High)',
+    priorityMedium: 'Sedang (Medium)',
+    priorityLow: 'Rendah (Low)',
+    statusLabel: 'Status:',
+    allStatuses: 'Semua Status',
+    statusPending: 'Pending',
+    statusDone: 'Selesai (Done)',
+    legendHigh: 'Prioritas Tinggi',
+    legendMedium: 'Sedang',
+    legendLow: 'Rendah',
+    loading: 'Memuat kalender tugas...',
+    actionsCount: '{count} aksi',
+    days: {
+      sun: 'Minggu',
+      mon: 'Senin',
+      tue: 'Selasa',
+      wed: 'Rabu',
+      thu: 'Kamis',
+      fri: 'Jumat',
+      sat: 'Sabtu'
+    },
+    months: [
+      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    ],
+    modal: {
+      priorityBadge: 'Prioritas {priority}',
+      area: 'Area: {name}',
+      actionPlan: 'Rencana Aksi / Task:',
+      scheduleDate: 'Tanggal Jadwal:',
+      status: 'Status:',
+      chatWa: 'Chat WA',
+      sendEmail: 'Kirim Email',
+      openCustomerDetail: 'Buka Detail Customer ➔',
+      markPending: 'Tandai Pending',
+      markDone: 'Tandai Selesai (Done)',
+      statusDoneLabel: 'SELESAI (DONE)',
+      statusPendingLabel: 'PENDING'
+    },
+    updateStatusError: 'Gagal mengupdate status aksi'
+  },
+
+  // Pipeline
+  pipeline: {
+    title: 'Deal Pipeline (Kanban Board)',
+    subtitle: 'Kelola dan geser posisi prospek pelanggan berdasarkan tahapan penjualan'
   }
 }

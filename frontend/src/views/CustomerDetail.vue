@@ -442,7 +442,9 @@
           <div class="flex items-start justify-between mb-2">
             <div>
               <div class="flex items-center space-x-2">
-                <span class="font-semibold text-gray-900">{{ invoice.invoice_number }}</span>
+                <router-link :to="`/invoices/${invoice.id}`" class="font-semibold text-navy hover:text-gold transition-colors">
+                  {{ invoice.invoice_number }}
+                </router-link>
                 <span
                   class="badge text-xs"
                   :class="{
@@ -452,7 +454,7 @@
                     'bg-red-100 text-red-800': invoice.status === 'cancelled',
                   }"
                 >
-                  {{ $t(`customerDetail.${invoice.status}`) }}
+                  {{ $t('customerDetail.' + invoice.status) }}
                 </span>
               </div>
               <div class="text-sm text-gray-600 mt-1">

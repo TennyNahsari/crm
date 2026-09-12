@@ -74,5 +74,31 @@ export const useEmailSettingStore = defineStore('emailSetting', {
         this.loading = false
       }
     },
+    async testSmtp(data) {
+      try {
+        const response = await api.post('/email-settings/test-smtp', data)
+        return response.data
+      } catch (error) {
+        throw error
+      }
+    },
+
+    async testImap(data) {
+      try {
+        const response = await api.post('/email-settings/test-imap', data)
+        return response.data
+      } catch (error) {
+        throw error
+      }
+    },
+
+    async syncImap() {
+      try {
+        const response = await api.post('/email-settings/sync-imap')
+        return response.data
+      } catch (error) {
+        throw error
+      }
+    },
   },
 })

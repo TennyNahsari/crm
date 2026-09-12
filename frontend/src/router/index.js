@@ -3,13 +3,18 @@ import { useAuthStore } from '@/stores/auth'
 
 const routes = [
   {
+    path: '/',
+    name: 'Landing',
+    component: () => import('@/views/Landing.vue'),
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/Login.vue'),
     meta: { guest: true },
   },
   {
-    path: '/',
+    path: '/dashboard',
     component: () => import('@/layouts/MainLayout.vue'),
     meta: { requiresAuth: true },
     children: [
@@ -88,6 +93,31 @@ const routes = [
         name: 'BroadcastEmailHistory',
         component: () => import('@/views/BroadcastEmailHistory.vue'),
       },
+      {
+        path: 'invoices',
+        name: 'Invoices',
+        component: () => import('@/views/Invoices.vue'),
+      },
+      {
+        path: 'invoices/create',
+        name: 'InvoiceCreate',
+        component: () => import('@/views/InvoiceForm.vue'),
+      },
+      {
+        path: 'invoices/:id',
+        name: 'InvoiceDetail',
+        component: () => import('@/views/InvoiceDetail.vue'),
+      },
+      {
+        path: 'invoices/:id/edit',
+        name: 'InvoiceEdit',
+        component: () => import('@/views/InvoiceForm.vue'),
+      },
+      {
+        path: 'calendar',
+        name: 'Calendar',
+        component: () => import('@/views/Calendar.vue'),
+      },
     ],
   },
 ]
@@ -109,8 +139,8 @@ router.beforeEach(async (to, from, next) => {
       next()
     }
   } else if (to.meta.guest && authStore.isAuthenticated) {
-    // Guest route but user is authenticated, redirect to home
-    next('/')
+    // Guest route but user is authenticated, redirect to dashboard
+    next('/dashboard')
   } else {
     next()
   }

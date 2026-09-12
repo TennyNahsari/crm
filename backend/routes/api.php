@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\EmailSettingController;
 use App\Http\Controllers\Api\EmailController;
 use App\Http\Controllers\Api\BroadcastEmailController;
 use App\Http\Controllers\Api\InvoiceController;
+use App\Http\Controllers\Api\CalendarController;
 use App\Http\Controllers\Api\MLController;
 
 // CSRF cookie route - MUST be in api.php with web middleware
@@ -59,10 +60,11 @@ Route::middleware(['auth:sanctum', 'tenant'])->group(function () {
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    // Dashboard
+    // Dashboard & Calendar
     Route::get('/dashboard/stats', [DashboardController::class, 'stats']);
     Route::get('/dashboard/today-actions', [DashboardController::class, 'todayActions']);
     Route::get('/dashboard/week-meetings', [DashboardController::class, 'weekMeetings']);
+    Route::get('/calendar/events', [CalendarController::class, 'events']);
 
     // Users
     Route::apiResource('users', UserController::class);
@@ -88,10 +90,13 @@ Route::middleware(['auth:sanctum', 'tenant'])->group(function () {
     // Lead Statuses
     Route::apiResource('lead-statuses', LeadStatusController::class);
 
-    // Email Settings
+    // Email Settings & IMAP Sync
     Route::get('/email-settings', [EmailSettingController::class, 'show']);
     Route::post('/email-settings', [EmailSettingController::class, 'store']);
     Route::put('/email-settings', [EmailSettingController::class, 'update']);
+    Route::post('/email-settings/test-smtp', [EmailSettingController::class, 'testSmtp']);
+    Route::post('/email-settings/test-imap', [EmailSettingController::class, 'testImap']);
+    Route::post('/email-settings/sync-imap', [EmailSettingController::class, 'syncImap']);
 
     // Send Email
     Route::post('/send-email', [EmailController::class, 'send']);

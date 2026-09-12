@@ -11,6 +11,7 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+    maxHeaderSize: 65536,
     hmr: {
       protocol: 'ws',
       host: 'localhost',

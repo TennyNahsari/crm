@@ -106,16 +106,23 @@
               <p v-if="customer.is_individual" class="text-xs text-gray-500">{{ $t('customers.individualCustomer') }}</p>
             </div>
             <div class="flex flex-col items-end space-y-1">
-              <span
-                v-if="customer.lead_status"
-                class="badge text-xs px-2 py-1"
-                :style="{
-                  backgroundColor: customer.lead_status.color + '20',
-                  color: customer.lead_status.color,
-                }"
-              >
-                {{ customer.lead_status.name }}
-              </span>
+              <div @click.stop class="inline-block">
+                <select
+                  :value="customer.lead_status_id"
+                  @change="quickUpdateLeadStatus(customer, $event.target.value)"
+                  class="text-xs font-bold py-1 px-2.5 rounded-full border cursor-pointer transition-all outline-none"
+                  :style="getStatusStyle(customer.lead_status)"
+                >
+                  <option
+                    v-for="st in statuses"
+                    :key="st.id"
+                    :value="st.id"
+                    class="bg-white text-slate-800 font-normal"
+                  >
+                    ● {{ st.name }}
+                  </option>
+                </select>
+              </div>
               <span
                 class="badge text-xs px-2 py-1"
                 :class="{
@@ -168,7 +175,7 @@
               <th class="w-24">
                 {{ $t('customers.area') }}
               </th>
-              <th class="w-24">
+              <th class="w-32">
                 {{ $t('customers.status') }}
               </th>
               <th class="w-20">
@@ -197,17 +204,22 @@
               <td class="text-sm text-slate-800">
                 <div class="truncate max-w-24">{{ customer.area?.name || '-' }}</div>
               </td>
-              <td>
-                <span
-                  v-if="customer.lead_status"
-                  class="badge text-xs px-2.5 py-0.5 rounded-full whitespace-nowrap font-medium"
-                  :style="{
-                    backgroundColor: customer.lead_status.color + '20',
-                    color: customer.lead_status.color,
-                  }"
+              <td @click.stop class="py-3 px-2">
+                <select
+                  :value="customer.lead_status_id"
+                  @change="quickUpdateLeadStatus(customer, $event.target.value)"
+                  class="text-xs font-bold py-1 px-2.5 rounded-full border cursor-pointer transition-all outline-none"
+                  :style="getStatusStyle(customer.lead_status)"
                 >
-                  {{ customer.lead_status.name }}
-                </span>
+                  <option
+                    v-for="st in statuses"
+                    :key="st.id"
+                    :value="st.id"
+                    class="bg-white text-slate-800 font-normal"
+                  >
+                    ● {{ st.name }}
+                  </option>
+                </select>
               </td>
               <td>
                 <span
@@ -333,6 +345,33 @@ const changePage = async (page) => {
 
 const goToDetail = (id) => {
   router.push(`/customers/${id}`)
+}
+
+const quickUpdateLeadStatus = async (customer, newStatusId) => {
+  const targetId = parseInt(newStatusId)
+  if (customer.lead_status_id === targetId) return
+  
+  try {
+    await api.put(`/customers/${customer.id}`, {
+      lead_status_id: targetId
+    })
+    const foundStatus = statuses.value.find(s => s.id === targetId)
+    customer.lead_status_id = targetId
+    if (foundStatus) {
+      customer.lead_status = foundStatus
+    }
+  } catch (err) {
+    alert('Gagal memperbarui status lead pelanggan')
+  }
+}
+
+const getStatusStyle = (status) => {
+  if (!status || !status.color) return { backgroundColor: '#f1f5f9', color: '#475569', borderColor: '#cbd5e1' }
+  return {
+    backgroundColor: status.color + '18',
+    color: status.color,
+    borderColor: status.color + '60'
+  }
 }
 
 const formatDate = (date) => {

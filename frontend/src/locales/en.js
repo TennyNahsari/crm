@@ -3,11 +3,87 @@ export default {
   header: {
     logout: 'Logout'
   },
+
+  // Landing Page
+  landing: {
+    badge: 'AI-Powered CRM & Sales Management',
+    heroTitle: 'Accelerate Sales & Customer Relations with Intelligence',
+    heroSubtitle: 'All-in-one CRM portal featuring AI customer predictions, automated broadcast emails, quotation & invoice management, and smart task scheduling.',
+    getStarted: 'Get Started',
+    goToDashboard: 'Go to Dashboard',
+    signIn: 'Sign In',
+    learnMore: 'Explore Features',
+    stats: {
+      customers: 'Active Customers Managed',
+      accuracy: 'AI Prediction Accuracy',
+      invoices: 'Invoices Generated',
+      deliveryRate: 'Email Delivery Rate'
+    },
+    nav: {
+      features: 'Features',
+      customersDb: 'Customer Database',
+      commHistory: 'Communication History',
+      aiPrediction: 'AI Prediction',
+      broadcastEmail: 'Broadcast Email',
+      invoices: 'Invoices',
+      calendar: 'Calendar',
+      login: 'Login'
+    },
+    sections: {
+      customerDbTitle: '360° Customer Database & Pipeline',
+      customerDbDesc: 'Centralize your customer profiles, sales assignments, region categorization, lead statuses, and deal pipeline tracking (Kanban Board) in one unified system.',
+      customerDbFeature1: 'Complete customer profiles (PIC contact, WhatsApp, email & industry field)',
+      customerDbFeature2: 'Interactive Deal Pipeline visualization with sales funnel stages',
+      customerDbFeature3: 'Region segmentation (Area) & dedicated Sales Person assignment',
+
+      commHistoryTitle: 'Communication History & Timeline',
+      commHistoryDesc: 'Track all customer interactions across channels — including inbound/outbound emails, WhatsApp chat logs, call notes, and meeting summaries in a clean timeline.',
+      commHistoryFeature1: 'Automated chronological timeline of every customer touchpoint',
+      commHistoryFeature2: 'Integrated follow-up notes & quick WhatsApp communication logs',
+      commHistoryFeature3: 'Direct email dispatch and reply history from customer profile sheets',
+
+      aiTitle: 'AI Customer Potential Prediction',
+      aiDesc: 'Leverage machine learning models to automatically analyze customer parameters and predict top potential leads for maximum conversion.',
+      aiFeature1: 'Automated ML model training on real customer data',
+      aiFeature2: 'Instant top-potential customer ranking & score breakdown',
+      aiFeature3: 'Data-driven insights to prioritize high-value sales actions',
+
+      emailTitle: 'SMTP & IMAP Broadcast Email Engine',
+      emailDesc: 'Send targeted email campaigns directly from your CRM. Sync incoming customer replies with IMAP auto-sync.',
+      emailFeature1: 'Targeted mass mailing filtered by region & company',
+      emailFeature2: 'IMAP inbound email sync with automatic action queues',
+      emailFeature3: 'Draft history, rich HTML editor & file attachments',
+
+      invoiceTitle: 'Quotations & Invoicing Made Simple',
+      invoiceDesc: 'Create, manage, and track professional sales quotations, proforma invoices, and payment statuses seamlessly.',
+      invoiceFeature1: 'Instant proforma & invoice PDF generation',
+      invoiceFeature2: 'Real-time payment status tracking (Paid, Sent, Draft, Cancelled)',
+      invoiceFeature3: 'Automated tax (PPN) and discount calculations',
+
+      calendarTitle: 'Smart Task & Follow-Up Calendar',
+      calendarDesc: 'Keep your sales team organized with an interactive task calendar and action plan priorities.',
+      calendarFeature1: 'Visual monthly schedule of follow-ups and meetings',
+      calendarFeature2: 'Priority classification (High, Medium, Low)',
+      calendarFeature3: 'One-click WhatsApp chat & email action triggers'
+    },
+    cta: {
+      title: 'Ready to Transform Your Customer Relationships?',
+      subtitle: 'Experience the power of AI predictions and streamlined CRM workflows today.',
+      button: 'Access FlowCRM Portal'
+    },
+    footer: {
+      tagline: 'Smart CRM & Customer Intelligence Platform',
+      copyright: 'FlowCRM Management Portal &copy; 2026. All rights reserved.'
+    }
+  },
   
   // Sidebar
   sidebar: {
     dashboard: 'Dashboard',
     customers: 'Customers',
+    pipeline: 'Deal Pipeline',
+    calendar: 'Task Calendar',
+    invoices: 'Invoices',
     broadcastEmail: 'Broadcast Email',
     sendBroadcast: 'Send Broadcast',
     drafts: 'Drafts',
@@ -268,6 +344,8 @@ export default {
     loading: 'Loading...',
     note: 'Note:',
     noteText: 'Configure your email settings to send emails directly from the CRM. These settings are private and only used for your account.',
+    smtpTitle: 'Outbound Email (SMTP Configuration)',
+    testSmtp: 'Test SMTP Connection',
     mailServer: 'Mail Server (SMTP Host)',
     mailServerExample: 'Example: smtp.gmail.com, smtp.office365.com',
     port: 'Port',
@@ -275,11 +353,13 @@ export default {
     encryption: 'Encryption',
     tls: 'TLS',
     ssl: 'SSL',
+    none: 'No Encryption',
     emailUsername: 'Email Username',
     emailUsernamePlaceholder: "your-email{'@'}example.com",
     emailUsernameHelp: 'Your email address for SMTP authentication',
     emailPassword: 'Email Password',
     emailPasswordPlaceholder: 'Enter your email password or app password',
+    smtpPasswordHelp: 'Use cPanel/webmail password or App Password. Leave as ******** if unchanged.',
     emailPasswordHelp: 'For Gmail, use App Password (not your regular password).',
     learnMore: 'Learn more',
     fromAddress: 'From Email Address',
@@ -292,7 +372,26 @@ export default {
     updateSuccess: 'Email settings updated successfully!',
     saveSuccess: 'Email settings saved successfully!',
     saveError: 'Failed to save email settings',
-    required: '*'
+    required: '*',
+    imapTitle: 'Inbound Email Settings (IMAP Sync & Auto Queue)',
+    enableImap: 'Enable Inbound Email Sync (IMAP)',
+    imapHost: 'IMAP Server Host',
+    imapHostExample: 'Example: imap.gmail.com, imap.mail.yahoo.com',
+    imapPort: 'IMAP Port',
+    imapPortExample: 'Usually 993 for SSL/TLS',
+    imapUsername: 'IMAP Username',
+    imapPassword: 'IMAP Password / App Password',
+    imapPasswordHelp: "Leave as ******** if you don't want to change saved password.",
+    neverSynced: 'Never synced',
+    testImap: 'Test IMAP Connection',
+    syncNow: 'Sync Emails Now',
+    lastSync: 'Last synced: {time}',
+    smtpTestSuccess: 'SMTP Connection Successful!\n\nYour SMTP settings will be saved automatically.',
+    smtpTestError: 'SMTP Authentication Failed: ',
+    imapTestSuccess: 'IMAP Connection Successful!\n\nYour IMAP settings will be saved automatically.',
+    imapTestError: 'IMAP Connection Test Failed: ',
+    syncSuccess: 'Email sync successful!',
+    syncError: 'Email sync failed: '
   },
   
   // Sales Page
@@ -363,5 +462,202 @@ export default {
     saveError: 'Failed to save area',
     loadError: 'Failed to load area',
     required: '*'
+  },
+  
+  // Invoices
+  invoices: {
+    title: 'Invoices & Quotations',
+    subtitle: 'Manage sales invoices, payment status, and price quotations',
+    createInvoice: 'Create New Invoice',
+    editInvoice: 'Edit Invoice',
+    invoiceDetail: 'Invoice Detail',
+    stats: {
+      totalInvoiced: 'Total Invoiced',
+      totalCount: '{count} Total Invoices',
+      paidAmount: 'Paid',
+      paidCount: '{count} Paid Invoices',
+      unpaidAmount: 'Unpaid (Sent)',
+      unpaidCount: '{count} Pending Payment',
+      draftCancelled: 'Draft / Cancelled',
+      draftCancelledCount: '{draft} Draft, {cancelled} Cancelled'
+    },
+    filters: {
+      searchPlaceholder: 'Search invoice no. or customer...',
+      allStatuses: 'All Statuses',
+      draftQuotation: 'Draft Quotation',
+      sentQuotation: 'Sent Quotation',
+      paid: 'Paid',
+      cancelled: 'Cancelled'
+    },
+    loading: 'Loading invoice data...',
+    emptyState: {
+      title: 'No Invoices Yet',
+      description: 'Sales invoices or price quotations you create will appear here.',
+      createFirst: 'Create First Invoice'
+    },
+    table: {
+      invoiceNumber: 'Invoice No.',
+      customer: 'Customer',
+      invoiceDate: 'Invoice Date',
+      dueDate: 'Due Date',
+      total: 'Total',
+      status: 'Status',
+      actions: 'Actions',
+      noCustomer: 'No Customer',
+      detail: 'Detail',
+      edit: 'Edit',
+      delete: 'Delete'
+    },
+    pagination: {
+      info: 'Page {current} of {last} (Total {total} invoices)',
+      previous: 'Previous',
+      next: 'Next'
+    },
+    status: {
+      paid: 'PAID',
+      sent: 'SENT',
+      draft: 'DRAFT',
+      cancelled: 'CANCELLED'
+    },
+    confirmDelete: 'Are you sure you want to delete invoice {number}?',
+    deleteError: 'Failed to delete invoice',
+
+    // Invoice Form
+    form: {
+      createTitle: 'Create New Invoice',
+      editTitle: 'Edit Invoice',
+      createSubtitle: 'Fill in transaction details and select customer',
+      editSubtitle: 'Update invoice detail data',
+      backToList: 'Back to List',
+      loadingForm: 'Loading form...',
+      sectionCustomer: 'Customer & Date Information',
+      sectionItems: 'Product / Service Details',
+      sectionNotes: 'Notes / Terms & Conditions',
+      customerLabel: 'Customer',
+      selectCustomer: '-- Select Customer --',
+      invoiceNumberLabel: 'Invoice Number (Optional)',
+      invoiceNumberPlaceholder: 'Auto-generated if left blank (e.g. INV-20260911-0001)',
+      statusLabel: 'Invoice Status',
+      invoiceDateLabel: 'Invoice Date',
+      dueDateLabel: 'Due Date',
+      statusOptions: {
+        draft: 'Draft',
+        sent: 'Sent',
+        paid: 'Paid',
+        cancelled: 'Cancelled'
+      },
+      addItem: 'Add Item',
+      itemNameLabel: 'Item / Service Name',
+      itemNamePlaceholder: 'e.g. CRM Consulting Service / Software License',
+      qtyLabel: 'Qty',
+      unitPriceLabel: 'Unit Price',
+      subtotalLabel: 'Subtotal',
+      removeRow: 'Remove Row',
+      notesLabel: 'Notes / Terms & Conditions',
+      notesPlaceholder: 'Thank you for your business. Payment can be transferred to BCA account 1234567890 a/n PT FlowCRM.',
+      itemsSubtotal: 'Item Subtotal',
+      taxLabel: 'Tax (VAT/Tax)',
+      taxPlaceholder: '$0',
+      discountLabel: 'Discount',
+      discountPlaceholder: '$0',
+      grandTotal: 'Grand Total',
+      cancel: 'Cancel',
+      saving: 'Saving...',
+      updateInvoice: 'Update Invoice',
+      saveInvoice: 'Save Invoice',
+      selectCustomerAlert: 'Please select a customer first',
+      loadInvoiceError: 'Failed to load invoice data',
+      saveInvoiceError: 'Failed to save invoice'
+    },
+
+    // Invoice Detail & Print
+    detailView: {
+      backToList: 'Back to List',
+      printPdf: 'Print / Save PDF',
+      markPaid: 'Mark as Paid',
+      edit: 'Edit',
+      loading: 'Loading invoice details...',
+      titleQuotation: 'QUOTATION',
+      subtitleQuotation: 'Price Quotation',
+      titleProforma: 'PROFORMA INVOICE',
+      subtitleProforma: 'Sent Quotation',
+      titleInvoice: 'INVOICE',
+      subtitleInvoice: 'Sales Invoice',
+      billedTo: 'Billed To:',
+      attn: 'Attn:',
+      issuedDate: 'Issued Date:',
+      dueDate: 'Due Date:',
+      itemDescription: 'Item / Service Description',
+      qty: 'Qty',
+      unitPrice: 'Unit Price',
+      total: 'Total',
+      notes: 'Notes:',
+      defaultNotes: 'Thank you for your trust.',
+      subtotal: 'Subtotal',
+      tax: 'Tax',
+      discount: 'Discount',
+      totalAmount: 'Total Amount',
+      paymentMethod: 'Payment Method:',
+      bankTransfer: 'Bank Transfer BCA / Mandiri',
+      billingDept: 'FlowCRM Billing Dept.',
+      authorizedSignature: 'Authorized Signature',
+      notFoundAlert: 'Invoice not found',
+      updateStatusError: 'Failed to update invoice status'
+    }
+  },
+
+  // Calendar
+  calendar: {
+    title: 'Task & Follow-Up Calendar',
+    subtitle: 'Schedule of action plans, meetings, and customer follow-ups',
+    today: 'Today',
+    priority: 'Priority:',
+    allPriorities: 'All Priorities',
+    priorityHigh: 'High (High)',
+    priorityMedium: 'Medium (Medium)',
+    priorityLow: 'Low (Low)',
+    statusLabel: 'Status:',
+    allStatuses: 'All Statuses',
+    statusPending: 'Pending',
+    statusDone: 'Done',
+    legendHigh: 'High Priority',
+    legendMedium: 'Medium',
+    legendLow: 'Low',
+    loading: 'Loading task calendar...',
+    actionsCount: '{count} actions',
+    days: {
+      sun: 'Sun',
+      mon: 'Mon',
+      tue: 'Tue',
+      wed: 'Wed',
+      thu: 'Thu',
+      fri: 'Fri',
+      sat: 'Sat'
+    },
+    months: [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ],
+    modal: {
+      priorityBadge: 'Priority {priority}',
+      area: 'Area: {name}',
+      actionPlan: 'Action Plan / Task:',
+      scheduleDate: 'Scheduled Date:',
+      status: 'Status:',
+      chatWa: 'Chat WA',
+      sendEmail: 'Send Email',
+      openCustomerDetail: 'Open Customer Detail ➔',
+      markPending: 'Mark Pending',
+      markDone: 'Mark Done',
+      statusDoneLabel: 'DONE',
+      statusPendingLabel: 'PENDING'
+    },
+    updateStatusError: 'Failed to update action status'
+  },
+
+  // Pipeline
+  pipeline: {
+    title: 'Deal Pipeline (Kanban Board)',
+    subtitle: 'Manage and move lead cards across sales funnel stages'
   }
 }

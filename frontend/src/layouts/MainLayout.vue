@@ -5,7 +5,7 @@
       class="w-64 bg-navy text-white shadow-xl hidden lg:flex lg:flex-col justify-between z-20"
       :class="{ 'hidden': !sidebarOpen }"
     >
-      <div>
+      <div class="flex-1 overflow-y-auto custom-scrollbar">
         <div class="p-6 border-b border-navy-light flex flex-col items-center justify-center">
           <div class="flex items-center justify-center mb-2 p-2 bg-white/10 rounded-xl backdrop-blur-sm">
             <img src="/logo.png" alt="Logo" class="h-10 w-auto" />
@@ -16,11 +16,11 @@
 
         <nav class="mt-6 px-3 space-y-1 font-sans">
           <router-link
-            to="/"
+            to="/dashboard"
             class="flex items-center px-4 py-3 text-white/80 hover:bg-white/10 hover:text-white rounded-lg transition-all text-sm font-medium"
             active-class="bg-gold text-white font-semibold shadow-md"
           >
-            <svg class="w-5 h-5 mr-3 text-gold" :class="{ 'text-white': route.path === '/' }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 mr-3 text-gold" :class="{ 'text-white': route.path.startsWith('/dashboard') }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
             {{ $t('sidebar.dashboard') }}
@@ -35,6 +35,28 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
             {{ $t('sidebar.customers') }}
+          </router-link>
+
+          <router-link
+            to="/calendar"
+            class="flex items-center px-4 py-3 text-white/80 hover:bg-white/10 hover:text-white rounded-lg transition-all text-sm font-medium"
+            active-class="bg-gold text-white font-semibold shadow-md"
+          >
+            <svg class="w-5 h-5 mr-3 text-gold" :class="{ 'text-white': route.path.startsWith('/calendar') }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            {{ $t('sidebar.calendar') }}
+          </router-link>
+
+          <router-link
+            to="/invoices"
+            class="flex items-center px-4 py-3 text-white/80 hover:bg-white/10 hover:text-white rounded-lg transition-all text-sm font-medium"
+            active-class="bg-gold text-white font-semibold shadow-md"
+          >
+            <svg class="w-5 h-5 mr-3 text-gold" :class="{ 'text-white': route.path.startsWith('/invoices') }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            {{ $t('sidebar.invoices') }}
           </router-link>
           
           <!-- Broadcast Email Dropdown -->
@@ -146,7 +168,7 @@
       </div>
 
       <!-- Footer / Version Info -->
-      <div class="p-4 border-t border-white/10 text-center">
+      <div class="p-4 border-t border-white/10 text-center shrink-0">
         <p class="text-[11px] text-white/50">FlowCRM v1.0 &copy; 2026</p>
       </div>
     </aside>
@@ -221,7 +243,7 @@
         @click="sidebarOpen = false"
       >
         <aside class="w-64 bg-navy text-white h-full shadow-2xl flex flex-col justify-between" @click.stop>
-          <div>
+          <div class="flex-1 overflow-y-auto custom-scrollbar">
             <div class="p-6 border-b border-navy-light flex flex-col items-center justify-center">
               <div class="flex items-center justify-center mb-2 p-2 bg-white/10 rounded-xl">
                 <img src="/logo.png" alt="Logo" class="h-10 w-auto" />
@@ -230,7 +252,7 @@
             </div>
             <nav class="mt-6 px-3 space-y-1">
               <router-link
-                to="/"
+                to="/dashboard"
                 class="flex items-center px-4 py-3 text-white/80 hover:bg-white/10 hover:text-white rounded-lg transition-all text-sm font-medium"
                 active-class="bg-gold text-white font-semibold"
                 @click="sidebarOpen = false"
@@ -250,6 +272,30 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
                 {{ $t('sidebar.customers') }}
+              </router-link>
+
+              <router-link
+                to="/calendar"
+                class="flex items-center px-4 py-3 text-white/80 hover:bg-white/10 hover:text-white rounded-lg transition-all text-sm font-medium"
+                active-class="bg-gold text-white font-semibold"
+                @click="sidebarOpen = false"
+              >
+                <svg class="w-5 h-5 mr-3 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                {{ $t('sidebar.calendar') }}
+              </router-link>
+
+              <router-link
+                to="/invoices"
+                class="flex items-center px-4 py-3 text-white/80 hover:bg-white/10 hover:text-white rounded-lg transition-all text-sm font-medium"
+                active-class="bg-gold text-white font-semibold"
+                @click="sidebarOpen = false"
+              >
+                <svg class="w-5 h-5 mr-3 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                {{ $t('sidebar.invoices') }}
               </router-link>
               
               <!-- Broadcast Email Dropdown Mobile -->
@@ -365,7 +411,7 @@
             </nav>
           </div>
 
-          <div class="p-4 border-t border-white/10 text-center">
+          <div class="p-4 border-t border-white/10 text-center shrink-0">
             <p class="text-[11px] text-white/50">FlowCRM v1.0 &copy; 2026</p>
           </div>
         </aside>
@@ -388,7 +434,7 @@ import { useI18n } from 'vue-i18n'
 const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
-const { locale } = useI18n()
+const { t, locale } = useI18n()
 
 const sidebarOpen = ref(false)
 const settingsOpen = ref(false)
@@ -400,7 +446,32 @@ const user = computed(() => authStore.user)
 const currentLocale = computed(() => locale.value)
 
 const currentPageTitle = computed(() => {
-  return route.name || 'FlowCRM'
+  const name = route.name
+  if (!name) return 'FlowCRM'
+  const titleKeys = {
+    Dashboard: 'dashboard.title',
+    Customers: 'customers.title',
+    CustomerCreate: 'customerForm.addTitle',
+    CustomerEdit: 'customerForm.editTitle',
+    CustomerDetail: 'customers.title',
+    Calendar: 'calendar.title',
+    Invoices: 'invoices.title',
+    InvoiceCreate: 'invoices.form.createTitle',
+    InvoiceEdit: 'invoices.form.editTitle',
+    InvoiceDetail: 'invoices.invoiceDetail',
+    Settings: 'settings.title',
+    BroadcastEmail: 'broadcastEmail.title',
+    BroadcastEmailDrafts: 'broadcastEmail.draftsTitle',
+    BroadcastEmailHistory: 'broadcastEmail.historyTitle',
+    Areas: 'areas.title',
+    AreaCreate: 'areas.addTitle',
+    AreaEdit: 'areas.editTitle',
+    Sales: 'sales.title',
+    SalesCreate: 'sales.addTitle',
+    SalesEdit: 'sales.editTitle',
+  }
+  const key = titleKeys[name]
+  return key ? t(key) : name
 })
 
 const changeLanguage = (lang) => {
@@ -418,3 +489,13 @@ const handleLogout = async () => {
   }
 }
 </script>
+
+<style scoped>
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+</style>

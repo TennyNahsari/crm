@@ -19,7 +19,7 @@ class EmailController extends Controller
     {
         $validated = $request->validate([
             'customer_id' => 'required|exists:customers,id',
-            'to' => 'required|string', // Changed to string to support multiple emails
+            'to' => 'required|string',
             'subject' => 'required|string',
             'body' => 'required|string',
             'attachments.*' => 'nullable|file|max:10240', // Max 10MB per file
@@ -28,28 +28,38 @@ class EmailController extends Controller
         $userProfile = $this->getCurrentUserProfile();
         $emailSetting = EmailSetting::where('user_id', $userProfile->id)->first();
 
-        if (!$emailSetting) {
+        if (!$emailSetting || empty($emailSetting->mail_host) || empty($emailSetting->mail_username)) {
             return response()->json([
-                'message' => 'Please configure your email settings first'
+                'message' => 'Silakan konfigurasi Pengaturan Email (SMTP) Anda terlebih dahulu.'
             ], 400);
         }
 
+        // Clean single from email address (prevent comma-separated multiple emails causing 550 spoofed email error)
+        $rawFrom = $emailSetting->mail_from_address ?: $emailSetting->mail_username;
+        $fromAddress = trim(explode(',', $rawFrom)[0]);
+        $fromName = $emailSetting->mail_from_name ?: 'FlowCRM';
+
         // Configure mail settings dynamically
+        Config::set('mail.default', 'smtp');
+        Config::set('mail.mailers.smtp.transport', 'smtp');
         Config::set('mail.mailers.smtp.host', $emailSetting->mail_host);
         Config::set('mail.mailers.smtp.port', $emailSetting->mail_port);
         Config::set('mail.mailers.smtp.username', $emailSetting->mail_username);
         Config::set('mail.mailers.smtp.password', $emailSetting->mail_password);
         Config::set('mail.mailers.smtp.encryption', $emailSetting->mail_encryption);
-        Config::set('mail.from.address', $emailSetting->mail_from_address);
-        Config::set('mail.from.name', $emailSetting->mail_from_name);
+        Config::set('mail.from.address', $fromAddress);
+        Config::set('mail.from.name', $fromName);
+
+        // Purge mailer cache so Laravel applies dynamic configuration
+        Mail::purge('smtp');
 
         try {
             // Send email with HTML support and attachments
-            Mail::send([], [], function ($message) use ($validated, $emailSetting, $request) {
+            Mail::send([], [], function ($message) use ($validated, $fromAddress, $fromName, $request) {
                 $message->to($validated['to'])
                         ->subject($validated['subject'])
-                        ->from($emailSetting->mail_from_address, $emailSetting->mail_from_name)
-                        ->html($validated['body']); // Use html() instead of raw()
+                        ->from($fromAddress, $fromName)
+                        ->html($validated['body']);
                 
                 // Attach files if present
                 if ($request->hasFile('attachments')) {
