@@ -256,25 +256,13 @@
       </div>
 
       <!-- Pagination -->
-      <div v-if="pagination.last_page > 1" class="flex justify-center items-center space-x-2 mt-6">
-        <button
-          @click="changePage(pagination.current_page - 1)"
-          :disabled="pagination.current_page === 1"
-          class="btn btn-secondary disabled:opacity-50"
-        >
-          {{ $t('customers.previous') }}
-        </button>
-        <span class="text-sm text-gray-600">
-          {{ $t('customers.pageOf', { current: pagination.current_page, total: pagination.last_page }) }}
-        </span>
-        <button
-          @click="changePage(pagination.current_page + 1)"
-          :disabled="pagination.current_page === pagination.last_page"
-          class="btn btn-secondary disabled:opacity-50"
-        >
-          {{ $t('customers.nextPage') }}
-        </button>
-      </div>
+      <Pagination
+        :current-page="pagination.current_page"
+        :total-pages="pagination.last_page"
+        :prev-text="$t('customers.previous')"
+        :next-text="$t('customers.nextPage')"
+        @change="changePage"
+      />
 
       <!-- No data -->
       <div v-if="!loading && customers.length === 0" class="card text-center py-12">
@@ -291,6 +279,7 @@ import { useCustomerStore } from '@/stores/customer'
 import { useAreaStore } from '@/stores/area'
 import { useLeadStatusStore } from '@/stores/leadStatus'
 import api from '@/api/axios'
+import Pagination from '@/components/Pagination.vue'
 
 const router = useRouter()
 const route = useRoute()

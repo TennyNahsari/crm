@@ -216,26 +216,17 @@
       </div>
 
       <!-- Pagination -->
-      <div v-if="pagination.total > pagination.per_page" class="p-4 border-t border-stone/60 flex items-center justify-between bg-stone-light/50">
+      <div v-if="pagination.last_page > 1" class="p-4 border-t border-stone/60 bg-stone-light/50 flex flex-col sm:flex-row items-center justify-between gap-3">
         <span class="text-xs text-slate-500 font-medium">
           {{ $t('invoices.pagination.info', { current: pagination.current_page, last: pagination.last_page, total: pagination.total }) }}
         </span>
-        <div class="flex gap-2">
-          <button
-            @click="changePage(pagination.current_page - 1)"
-            :disabled="pagination.current_page === 1"
-            class="btn btn-secondary text-xs px-3 py-1.5 disabled:opacity-50"
-          >
-            {{ $t('invoices.pagination.previous') }}
-          </button>
-          <button
-            @click="changePage(pagination.current_page + 1)"
-            :disabled="pagination.current_page === pagination.last_page"
-            class="btn btn-secondary text-xs px-3 py-1.5 disabled:opacity-50"
-          >
-            {{ $t('invoices.pagination.next') }}
-          </button>
-        </div>
+        <Pagination
+          :current-page="pagination.current_page"
+          :total-pages="pagination.last_page"
+          :prev-text="$t('invoices.pagination.previous')"
+          :next-text="$t('invoices.pagination.next')"
+          @change="changePage"
+        />
       </div>
     </div>
   </div>
@@ -245,6 +236,7 @@
 import { ref, reactive, onMounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { getInvoices, deleteInvoice } from '@/api/invoices'
+import Pagination from '@/components/Pagination.vue'
 
 const { t, locale } = useI18n()
 const loading = ref(true)

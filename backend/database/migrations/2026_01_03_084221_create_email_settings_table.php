@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('email_settings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('user_profiles')->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->string('mail_host')->nullable();
             $table->integer('mail_port')->nullable();
             $table->string('mail_username')->nullable();

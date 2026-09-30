@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('password');
             $table->enum('role', ['admin', 'sales', 'marketing', 'manager'])->default('sales');
             $table->boolean('is_active')->default(true);
+            $table->string('phone', 50)->nullable();
+            $table->string('avatar_url', 500)->nullable();
+            $table->timestamp('last_login_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

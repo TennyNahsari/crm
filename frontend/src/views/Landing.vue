@@ -263,6 +263,17 @@
                   <div class="bg-emerald-500/20 text-emerald-300 p-1.5 rounded">Won (24)</div>
                 </div>
               </div>
+              <!-- Interactive Live Pagination Demo -->
+              <div class="pt-2 border-t border-white/10">
+                <div class="text-[10px] text-slate-300 mb-1 text-center font-semibold">Pagination Navigation Preview (Page {{ demoCurrentPage }} of 10)</div>
+                <Pagination
+                  :current-page="demoCurrentPage"
+                  :total-pages="10"
+                  prev-text="Prev"
+                  next-text="Next"
+                  @change="(p) => demoCurrentPage = p"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -557,10 +568,12 @@
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '@/stores/auth'
+import Pagination from '@/components/Pagination.vue'
 
 const { locale } = useI18n()
 const authStore = useAuthStore()
 const mobileMenuOpen = ref(false)
+const demoCurrentPage = ref(1)
 
 const isAuthenticated = computed(() => authStore.isAuthenticated)
 const currentLocale = computed(() => locale.value)

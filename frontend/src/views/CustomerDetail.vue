@@ -390,27 +390,13 @@
         </div>
 
         <!-- Pagination -->
-        <div v-if="interactionPagination.last_page > 1" class="flex flex-col sm:flex-row justify-center items-center gap-2 sm:space-x-2 mt-6 pt-4 border-t">
-          <button
-            @click="changeInteractionPage(interactionPagination.current_page - 1)"
-            :disabled="interactionPagination.current_page === 1"
-            class="w-full sm:w-auto px-3 py-2 rounded border text-sm"
-            :class="interactionPagination.current_page === 1 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-gray-700 hover:bg-gray-50'"
-          >
-            {{ $t('customerDetail.previous') }}
-          </button>
-          <span class="text-sm text-gray-600">
-            {{ $t('customerDetail.pageOf', { current: interactionPagination.current_page, total: interactionPagination.last_page }) }}
-          </span>
-          <button
-            @click="changeInteractionPage(interactionPagination.current_page + 1)"
-            :disabled="interactionPagination.current_page === interactionPagination.last_page"
-            class="w-full sm:w-auto px-3 py-2 rounded border text-sm"
-            :class="interactionPagination.current_page === interactionPagination.last_page ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-gray-700 hover:bg-gray-50'"
-          >
-            {{ $t('customerDetail.next') }}
-          </button>
-        </div>
+        <Pagination
+          :current-page="interactionPagination.current_page"
+          :total-pages="interactionPagination.last_page"
+          :prev-text="$t('customerDetail.previous')"
+          :next-text="$t('customerDetail.next')"
+          @change="changeInteractionPage"
+        />
       </div>
 
       <div v-else class="text-center text-gray-500 py-8">
@@ -516,27 +502,13 @@
         </div>
 
         <!-- Pagination -->
-        <div v-if="invoicePagination.last_page > 1" class="flex flex-col sm:flex-row justify-center items-center gap-2 sm:space-x-2 mt-6 pt-4 border-t">
-          <button
-            @click="changeInvoicePage(invoicePagination.current_page - 1)"
-            :disabled="invoicePagination.current_page === 1"
-            class="w-full sm:w-auto px-3 py-2 rounded border text-sm"
-            :class="invoicePagination.current_page === 1 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-gray-700 hover:bg-gray-50'"
-          >
-            {{ $t('customerDetail.previous') }}
-          </button>
-          <span class="text-sm text-gray-600">
-            {{ $t('customerDetail.pageOf', { current: invoicePagination.current_page, total: invoicePagination.last_page }) }}
-          </span>
-          <button
-            @click="changeInvoicePage(invoicePagination.current_page + 1)"
-            :disabled="invoicePagination.current_page === invoicePagination.last_page"
-            class="w-full sm:w-auto px-3 py-2 rounded border text-sm"
-            :class="invoicePagination.current_page === invoicePagination.last_page ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-gray-700 hover:bg-gray-50'"
-          >
-            {{ $t('customerDetail.next') }}
-          </button>
-        </div>
+        <Pagination
+          :current-page="invoicePagination.current_page"
+          :total-pages="invoicePagination.last_page"
+          :prev-text="$t('customerDetail.previous')"
+          :next-text="$t('customerDetail.next')"
+          @change="changeInvoicePage"
+        />
       </div>
 
       <div v-else class="text-center text-gray-500 py-8">
@@ -958,6 +930,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useCustomerStore } from '@/stores/customer'
 import { useInteractionStore } from '@/stores/interaction'
 import { useContactStore } from '@/stores/contact'
+import Pagination from '@/components/Pagination.vue'
 import { useAreaStore } from '@/stores/area'
 import { useLeadStatusStore } from '@/stores/leadStatus'
 import { useEmailSettingStore } from '@/stores/emailSetting'

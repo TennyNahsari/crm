@@ -34,30 +34,21 @@ class SyncImapEmailsJob implements ShouldQueue
     {
         Log::info('Starting SyncImapEmailsJob...');
 
-        $tenants = ['crm', 'crm_ecogreen'];
-
-        foreach ($tenants as $tenantDb) {
-            try {
-                Config::set('database.connections.tenant.database', $tenantDb);
-                Config::set('database.default', 'tenant');
-                DB::purge('tenant');
-                DB::purge();
-
-                if ($this->emailSettingId) {
-                    $settings = EmailSetting::where('id', $this->emailSettingId)
-                        ->where('is_imap_enabled', true)
-                        ->get();
-                } else {
-                    $settings = EmailSetting::where('is_imap_enabled', true)->get();
-                }
-
-                foreach ($settings as $setting) {
-                    $result = $imapService->sync($setting);
-                    Log::info("Synced {$result['synced']} email(s) on tenant {$tenantDb} for User ID: {$setting->user_id}");
-                }
-            } catch (\Exception $e) {
-                Log::error("Failed IMAP sync on tenant {$tenantDb}: " . $e->getMessage());
+        try {
+            if ($this->emailSettingId) {
+                $settings = EmailSetting::where('id', $this->emailSettingId)
+                    ->where('is_imap_enabled', true)
+                    ->get();
+            } else {
+                $settings = EmailSetting::where('is_imap_enabled', true)->get();
             }
+
+            foreach ($settings as $setting) {
+                $result = $imapService->sync($setting);
+                Log::info("Synced {$result['synced']} email(s) for User ID: {$setting->user_id}");
+            }
+        } catch (\Exception $e) {
+            Log::error("Failed IMAP sync: " . $e->getMessage());
         }
     }
 }

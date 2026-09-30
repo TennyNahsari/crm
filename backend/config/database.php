@@ -4,32 +4,16 @@ use Illuminate\Support\Str;
 
 return [
 
-    'default' => env('DB_CONNECTION', 'master'),
+    'default' => env('DB_CONNECTION', 'pgsql'),
 
     'connections' => [
 
-        // Master database untuk authentication & tenant registry
-        'master' => [
+        'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_MASTER_DATABASE', 'crm_master'),
-            'username' => env('DB_USERNAME', 'crm'),
-            'password' => env('DB_PASSWORD', 'crm123'),  // Consistent with .env
-            'charset' => 'utf8',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'search_path' => 'public',
-            'sslmode' => 'prefer',
-        ],
-
-        // Dynamic tenant database (set at runtime)
-        'tenant' => [
-            'driver' => 'pgsql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => null, // Will be set dynamically
+            'database' => env('DB_DATABASE', 'crm'),
             'username' => env('DB_USERNAME', 'crm'),
             'password' => env('DB_PASSWORD', 'crm123'),
             'charset' => 'utf8',
@@ -39,15 +23,31 @@ return [
             'sslmode' => 'prefer',
         ],
 
-        // Legacy connection (untuk backward compatibility)
-        'pgsql' => [
+        // Alias master to main pgsql connection
+        'master' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'crm'),
             'username' => env('DB_USERNAME', 'crm'),
-            'password' => env('DB_PASSWORD', 'crm123'),  // Consistent with .env
+            'password' => env('DB_PASSWORD', 'crm123'),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'search_path' => 'public',
+            'sslmode' => 'prefer',
+        ],
+
+        // Alias tenant to main pgsql connection
+        'tenant' => [
+            'driver' => 'pgsql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE', 'crm'),
+            'username' => env('DB_USERNAME', 'crm'),
+            'password' => env('DB_PASSWORD', 'crm123'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,

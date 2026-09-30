@@ -8,20 +8,11 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::connection('master')->create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
-            $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
-            $table->longText('payload');
-            $table->integer('last_activity')->index();
-            
-            $table->index('user_id');
-        });
+        // No-op for single database architecture
     }
 
     public function down(): void
     {
-        Schema::connection('master')->dropIfExists('sessions');
+        // No-op
     }
 };

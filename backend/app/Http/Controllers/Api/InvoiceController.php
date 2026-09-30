@@ -77,7 +77,7 @@ class InvoiceController extends Controller
                 'total' => $total,
                 'status' => $request->status,
                 'notes' => $request->notes,
-                'created_by' => session('tenant_user_profile_id'),
+                'created_by' => auth()->id(),
             ]);
 
             // Create invoice items

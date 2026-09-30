@@ -274,25 +274,13 @@
         </template>
 
         <!-- Pagination -->
-        <div v-if="todayActionsPagination.last_page > 1" class="flex flex-col sm:flex-row justify-center items-center gap-2 sm:space-x-2 mt-4">
-          <button
-            @click="changeTodayActionsPage(todayActionsPagination.current_page - 1)"
-            :disabled="todayActionsPagination.current_page === 1"
-            class="w-full sm:w-auto px-3 py-2 text-sm border rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Previous
-          </button>
-          <span class="text-sm text-gray-700">
-            Page {{ todayActionsPagination.current_page }} of {{ todayActionsPagination.last_page }}
-          </span>
-          <button
-            @click="changeTodayActionsPage(todayActionsPagination.current_page + 1)"
-            :disabled="todayActionsPagination.current_page === todayActionsPagination.last_page"
-            class="w-full sm:w-auto px-3 py-2 text-sm border rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Next
-          </button>
-        </div>
+        <Pagination
+          :current-page="todayActionsPagination.current_page"
+          :total-pages="todayActionsPagination.last_page"
+          :prev-text="$t('invoices.pagination.previous')"
+          :next-text="$t('invoices.pagination.next')"
+          @change="changeTodayActionsPage"
+        />
       </div>
 
       <!-- This Week Meetings -->
@@ -452,25 +440,13 @@
         </div>
 
         <!-- Pagination -->
-        <div v-if="weekMeetingsPagination.last_page > 1" class="flex flex-col sm:flex-row justify-center items-center gap-2 sm:space-x-2 mt-4">
-          <button
-            @click="changeWeekMeetingsPage(weekMeetingsPagination.current_page - 1)"
-            :disabled="weekMeetingsPagination.current_page === 1"
-            class="w-full sm:w-auto px-3 py-2 text-sm border rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Previous
-          </button>
-          <span class="text-sm text-gray-700">
-            Page {{ weekMeetingsPagination.current_page }} of {{ weekMeetingsPagination.last_page }}
-          </span>
-          <button
-            @click="changeWeekMeetingsPage(weekMeetingsPagination.current_page + 1)"
-            :disabled="weekMeetingsPagination.current_page === weekMeetingsPagination.last_page"
-            class="w-full sm:w-auto px-3 py-2 text-sm border rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Next
-          </button>
-        </div>
+        <Pagination
+          :current-page="weekMeetingsPagination.current_page"
+          :total-pages="weekMeetingsPagination.last_page"
+          :prev-text="$t('invoices.pagination.previous')"
+          :next-text="$t('invoices.pagination.next')"
+          @change="changeWeekMeetingsPage"
+        />
       </div>
 
       <!-- Charts Row -->
@@ -530,6 +506,7 @@ import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useDashboardStore } from '@/stores/dashboard'
 import axios from '@/api/axios'
+import Pagination from '@/components/Pagination.vue'
 
 const router = useRouter()
 const dashboardStore = useDashboardStore()
