@@ -14,7 +14,7 @@ const routes = [
     meta: { guest: true },
   },
   {
-    path: '',
+    path: '/app',
     component: () => import('@/layouts/MainLayout.vue'),
     meta: { requiresAuth: true },
     children: [
