@@ -18,7 +18,7 @@
         <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-white/80">
           <a href="#customers-db" class="hover:text-gold transition-colors">{{ $t('landing.nav.customersDb') }}</a>
           <a href="#comm-history" class="hover:text-gold transition-colors">{{ $t('landing.nav.commHistory') }}</a>
-          <a href="#ai-prediction" class="hover:text-gold transition-colors">{{ $t('landing.nav.aiPrediction') }}</a>
+          <!-- <a href="#ai-prediction" class="hover:text-gold transition-colors">{{ $t('landing.nav.aiPrediction') }}</a> -->
           <a href="#broadcast-email" class="hover:text-gold transition-colors">{{ $t('landing.nav.broadcastEmail') }}</a>
           <a href="#invoices" class="hover:text-gold transition-colors">{{ $t('landing.nav.invoices') }}</a>
           <a href="#calendar" class="hover:text-gold transition-colors">{{ $t('landing.nav.calendar') }}</a>
@@ -77,7 +77,7 @@
       <div v-if="mobileMenuOpen" class="md:hidden bg-navy border-b border-navy-light px-4 pt-2 pb-6 space-y-3">
         <a @click="mobileMenuOpen = false" href="#customers-db" class="block text-sm text-white/80 hover:text-gold py-2 border-b border-white/5">{{ $t('landing.nav.customersDb') }}</a>
         <a @click="mobileMenuOpen = false" href="#comm-history" class="block text-sm text-white/80 hover:text-gold py-2 border-b border-white/5">{{ $t('landing.nav.commHistory') }}</a>
-        <a @click="mobileMenuOpen = false" href="#ai-prediction" class="block text-sm text-white/80 hover:text-gold py-2 border-b border-white/5">{{ $t('landing.nav.aiPrediction') }}</a>
+        <!-- <a @click="mobileMenuOpen = false" href="#ai-prediction" class="block text-sm text-white/80 hover:text-gold py-2 border-b border-white/5">{{ $t('landing.nav.aiPrediction') }}</a> -->
         <a @click="mobileMenuOpen = false" href="#broadcast-email" class="block text-sm text-white/80 hover:text-gold py-2 border-b border-white/5">{{ $t('landing.nav.broadcastEmail') }}</a>
         <a @click="mobileMenuOpen = false" href="#invoices" class="block text-sm text-white/80 hover:text-gold py-2 border-b border-white/5">{{ $t('landing.nav.invoices') }}</a>
         <a @click="mobileMenuOpen = false" href="#calendar" class="block text-sm text-white/80 hover:text-gold py-2 border-b border-white/5">{{ $t('landing.nav.calendar') }}</a>
@@ -550,7 +550,7 @@
         <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs text-white/70">
           <a href="#customers-db" class="hover:text-gold transition-colors">{{ $t('landing.nav.customersDb') }}</a>
           <a href="#comm-history" class="hover:text-gold transition-colors">{{ $t('landing.nav.commHistory') }}</a>
-          <a href="#ai-prediction" class="hover:text-gold transition-colors">{{ $t('landing.nav.aiPrediction') }}</a>
+          <!-- <a href="#ai-prediction" class="hover:text-gold transition-colors">{{ $t('landing.nav.aiPrediction') }}</a> -->
           <a href="#broadcast-email" class="hover:text-gold transition-colors">{{ $t('landing.nav.broadcastEmail') }}</a>
           <a href="#invoices" class="hover:text-gold transition-colors">{{ $t('landing.nav.invoices') }}</a>
           <a href="#calendar" class="hover:text-gold transition-colors">{{ $t('landing.nav.calendar') }}</a>
