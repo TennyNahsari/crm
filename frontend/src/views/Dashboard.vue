@@ -8,8 +8,8 @@
     </div>
 
     <div v-else-if="stats" class="space-y-6 font-sans">
-      <!-- AI Customer Prediction -->
-      <div class="card bg-gradient-to-br from-white via-ivory to-stone-light/50 border border-gold/40 shadow-card">
+      <!-- AI Customer Prediction (Hidden) -->
+      <div v-if="false" class="card bg-gradient-to-br from-white via-ivory to-stone-light/50 border border-gold/40 shadow-card">
         <div class="flex items-center gap-2 sm:gap-3 mb-4">
           <div class="p-2 bg-navy text-gold rounded-xl text-xl sm:text-2xl shadow-sm">🤖</div>
           <div class="flex-1 min-w-0">

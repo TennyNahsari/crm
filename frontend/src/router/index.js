@@ -137,16 +137,12 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
 
-  if (to.meta.requiresAuth) {
-    if (!authStore.isAuthenticated) {
-      // Not authenticated, redirect to login
-      next('/login')
-    } else {
-      // Already authenticated, proceed
-      next()
-    }
-  } else if (to.meta.guest && authStore.isAuthenticated) {
-    // Guest route but user is authenticated, redirect to dashboard
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const isGuestOnly = to.matched.some(record => record.meta.guest)
+
+  if (requiresAuth && !authStore.isAuthenticated) {
+    next('/login')
+  } else if (isGuestOnly && authStore.isAuthenticated) {
     next('/dashboard')
   } else {
     next()

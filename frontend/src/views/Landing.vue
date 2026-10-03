@@ -346,8 +346,8 @@
           </div>
         </div>
 
-        <!-- Feature 3: AI Prediction -->
-        <div id="ai-prediction" class="mb-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white p-8 lg:p-12 rounded-3xl border border-stone/80 shadow-card">
+        <!-- Feature 3: AI Prediction (Hidden) -->
+        <div v-if="false" id="ai-prediction" class="mb-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white p-8 lg:p-12 rounded-3xl border border-stone/80 shadow-card">
           <div>
             <div class="w-12 h-12 rounded-2xl bg-gold/10 text-gold flex items-center justify-center font-bold mb-6">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

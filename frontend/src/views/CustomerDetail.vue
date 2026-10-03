@@ -104,8 +104,8 @@
       </div>
     </div>
 
-    <!-- AI Prediction Score Card -->
-    <div class="card bg-gradient-to-br from-purple-50 to-indigo-50 border-2 border-purple-200">
+    <!-- AI Prediction Score Card (Hidden) -->
+    <div v-if="false" class="card bg-gradient-to-br from-purple-50 to-indigo-50 border-2 border-purple-200">
       <div class="flex items-center justify-between mb-4">
         <div class="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
           <div class="text-2xl sm:text-3xl">🤖</div>
