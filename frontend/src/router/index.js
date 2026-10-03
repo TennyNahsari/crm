@@ -153,4 +153,17 @@ router.beforeEach(async (to, from, next) => {
   }
 })
 
+router.onError((error, to) => {
+  if (
+    error.message?.includes('Failed to fetch dynamically imported module') ||
+    error.message?.includes('Importing a module script failed')
+  ) {
+    if (to?.fullPath) {
+      window.location.href = to.fullPath
+    } else {
+      window.location.reload()
+    }
+  }
+})
+
 export default router
