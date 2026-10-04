@@ -79,6 +79,7 @@ export default {
   
   // Sidebar
   sidebar: {
+    landingPage: 'Landing Page',
     dashboard: 'Dashboard',
     customers: 'Customers',
     pipeline: 'Deal Pipeline',

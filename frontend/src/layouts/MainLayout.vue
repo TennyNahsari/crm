@@ -6,15 +6,26 @@
       :class="{ 'hidden': !sidebarOpen }"
     >
       <div class="flex-1 overflow-y-auto custom-scrollbar">
-        <div class="p-6 border-b border-navy-light flex flex-col items-center justify-center">
-          <div class="flex items-center justify-center mb-2 p-2 bg-white/10 rounded-xl backdrop-blur-sm">
+        <router-link to="/" class="p-6 border-b border-navy-light flex flex-col items-center justify-center group hover:bg-white/5 transition-colors">
+          <div class="flex items-center justify-center mb-2 p-2 bg-white/10 rounded-xl backdrop-blur-sm group-hover:bg-white/20 transition-all">
             <img src="/logo.png" alt="Logo" class="h-10 w-auto" />
           </div>
           <h1 class="font-serif font-bold italic text-2xl text-white tracking-wide mt-1">FlowCRM</h1>
           <span class="text-[11px] font-sans text-gold uppercase tracking-widest mt-0.5">Management Portal</span>
-        </div>
+        </router-link>
 
         <nav class="mt-6 px-3 space-y-1 font-sans">
+          <router-link
+            to="/"
+            class="flex items-center px-4 py-3 text-white/80 hover:bg-white/10 hover:text-white rounded-lg transition-all text-sm font-medium"
+            active-class="bg-gold text-white font-semibold shadow-md"
+          >
+            <svg class="w-5 h-5 mr-3 text-gold" :class="{ 'text-white': route.path === '/' }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m-9 9a9 9 0 019-9" />
+            </svg>
+            {{ $t('sidebar.landingPage') }}
+          </router-link>
+
           <router-link
             to="/dashboard"
             class="flex items-center px-4 py-3 text-white/80 hover:bg-white/10 hover:text-white rounded-lg transition-all text-sm font-medium"
@@ -244,13 +255,25 @@
       >
         <aside class="w-64 bg-navy text-white h-full shadow-2xl flex flex-col justify-between" @click.stop>
           <div class="flex-1 overflow-y-auto custom-scrollbar">
-            <div class="p-6 border-b border-navy-light flex flex-col items-center justify-center">
+            <router-link to="/" class="p-6 border-b border-navy-light flex flex-col items-center justify-center" @click="sidebarOpen = false">
               <div class="flex items-center justify-center mb-2 p-2 bg-white/10 rounded-xl">
                 <img src="/logo.png" alt="Logo" class="h-10 w-auto" />
               </div>
               <h1 class="font-serif font-bold italic text-2xl text-white tracking-wide">FlowCRM</h1>
-            </div>
+            </router-link>
             <nav class="mt-6 px-3 space-y-1">
+              <router-link
+                to="/"
+                class="flex items-center px-4 py-3 text-white/80 hover:bg-white/10 hover:text-white rounded-lg transition-all text-sm font-medium"
+                active-class="bg-gold text-white font-semibold"
+                @click="sidebarOpen = false"
+              >
+                <svg class="w-5 h-5 mr-3 text-gold" :class="{ 'text-white': route.path === '/' }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m-9 9a9 9 0 019-9" />
+                </svg>
+                {{ $t('sidebar.landingPage') }}
+              </router-link>
+
               <router-link
                 to="/dashboard"
                 class="flex items-center px-4 py-3 text-white/80 hover:bg-white/10 hover:text-white rounded-lg transition-all text-sm font-medium"

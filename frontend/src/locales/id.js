@@ -79,6 +79,7 @@ export default {
   
   // Sidebar
   sidebar: {
+    landingPage: 'Landing Page',
     dashboard: 'Beranda',
     customers: 'Pelanggan',
     pipeline: 'Pipeline Kanban',

@@ -51,13 +51,6 @@
           >
             {{ $t('landing.goToDashboard') }} ➔
           </router-link>
-          <router-link
-            v-else
-            to="/login"
-            class="btn bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-2.5 rounded-xl border border-white/20 transition-all hover:scale-[1.02]"
-          >
-            {{ $t('landing.signIn') }}
-          </router-link>
         </div>
 
         <!-- Mobile Menu Toggle -->
@@ -106,13 +99,6 @@
             class="btn bg-gold text-white font-semibold text-xs px-4 py-2 rounded-lg"
           >
             {{ $t('landing.goToDashboard') }}
-          </router-link>
-          <router-link
-            v-else
-            to="/login"
-            class="btn bg-white/20 text-white font-semibold text-xs px-4 py-2 rounded-lg"
-          >
-            {{ $t('landing.signIn') }}
           </router-link>
         </div>
       </div>
