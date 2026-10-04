@@ -2,10 +2,12 @@
   <div class="min-h-screen flex items-center justify-center bg-[#F8F6F2] px-4 py-12">
     <div class="max-w-md w-full bg-white rounded-xl shadow-card border border-stone/60 p-8">
       <div class="text-center mb-8">
-        <div class="inline-flex p-3 bg-navy/5 rounded-2xl mb-3 border border-stone">
-          <img src="/logo.png" alt="Logo" class="h-16 w-auto mx-auto" />
-        </div>
-        <h1 class="font-serif font-bold italic text-3xl text-navy tracking-wide">FlowCRM</h1>
+        <router-link to="/" class="inline-flex p-3 bg-navy/5 rounded-2xl mb-3 border border-stone hover:bg-navy/10 transition-all group" title="Kembali ke Landing Page">
+          <img src="/logo.png" alt="Logo" class="h-16 w-auto mx-auto group-hover:scale-105 transition-transform" />
+        </router-link>
+        <h1 class="font-serif font-bold italic text-3xl text-navy tracking-wide">
+          <router-link to="/" class="hover:text-gold transition-colors">FlowCRM</router-link>
+        </h1>
         <p class="text-slate-500 text-sm mt-1 font-sans">Customer & Lead Management System</p>
       </div>
 
@@ -61,10 +63,24 @@
         </button>
       </form>
 
-      <div class="mt-6 pt-6 border-t border-stone text-center text-xs text-slate-500 font-sans space-y-1">
-        <p class="font-medium text-slate-700">Default Demo Credentials:</p>
-        <p><span class="text-slate-400">Email:</span> <code class="bg-stone-light px-1.5 py-0.5 rounded text-navy font-mono text-xs">admin@flowcrm.test</code></p>
-        <p><span class="text-slate-400">Password:</span> <code class="bg-stone-light px-1.5 py-0.5 rounded text-navy font-mono text-xs">password</code></p>
+      <div class="mt-6 pt-6 border-t border-stone text-center text-xs text-slate-500 font-sans space-y-3">
+        <div>
+          <router-link
+            to="/"
+            class="inline-flex items-center gap-1.5 text-navy hover:text-gold font-semibold transition-colors py-1.5 px-3 rounded-lg bg-stone-light hover:bg-stone border border-stone"
+          >
+            <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            <span>Kembali ke Landing Page</span>
+          </router-link>
+        </div>
+
+        <div class="pt-2 border-t border-stone/50 space-y-1">
+          <p class="font-medium text-slate-700">Default Demo Credentials:</p>
+          <p><span class="text-slate-400">Email:</span> <code class="bg-stone-light px-1.5 py-0.5 rounded text-navy font-mono text-xs">admin@flowcrm.test</code></p>
+          <p><span class="text-slate-400">Password:</span> <code class="bg-stone-light px-1.5 py-0.5 rounded text-navy font-mono text-xs">password</code></p>
+        </div>
       </div>
     </div>
   </div>
